@@ -18,8 +18,9 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate; // 经纬度
 @property (nonatomic, strong) Range *rangePMU; // 三金汇缴基数
 @property (nonatomic, strong) Range *rangeH; // 公积金汇缴基数
-@property (nonatomic, strong) IH *iH; // 五险一金
-@property (nonatomic, strong) NSMutableArray *websites;
+@property (nonatomic, strong) IH *iH; // 五险一金(个人)
+@property (nonatomic, strong) IH *iHEnterprise; // 五险一金(企业)
+@property (nonatomic, strong) NSArray *info;
 
 - (id)initWithName:(NSString *)name region:(NSString *)region coordinate:(CLLocationCoordinate2D)coordinate;
 

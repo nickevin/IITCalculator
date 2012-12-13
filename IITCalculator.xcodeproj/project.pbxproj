@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A03C4E81678CF2A00729E09 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A03C4E71678CF2A00729E09 /* XYPieChart.m */; };
+		0A1D6E9516760A60005743D6 /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D6E9416760A60005743D6 /* SDSegmentedControl.m */; };
+		0A1D6E9F16761D05005743D6 /* StatisticsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D6E9E16761D05005743D6 /* StatisticsView.m */; };
 		0A3616AE16292E5D00E0C6E9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3616AD16292E5D00E0C6E9 /* MessageUI.framework */; };
 		0A5329741615C3C6006E3244 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5329731615C3C6006E3244 /* QuartzCore.framework */; };
 		0A8F8DBB16106C68003FC311 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8F8DBA16106C68003FC311 /* UIKit.framework */; };
@@ -22,7 +25,7 @@
 		0AE8B36816731BDF00D7003A /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B35916731BDF00D7003A /* AboutController.m */; };
 		0AE8B36A16731BDF00D7003A /* HistoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B35D16731BDF00D7003A /* HistoryController.m */; };
 		0AE8B36B16731BDF00D7003A /* IITCalculatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B35F16731BDF00D7003A /* IITCalculatorController.m */; };
-		0AE8B36C16731BDF00D7003A /* IncomeDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B36116731BDF00D7003A /* IncomeDetailController.m */; };
+		0AE8B36C16731BDF00D7003A /* StatisticsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B36116731BDF00D7003A /* StatisticsController.m */; };
 		0AE8B36D16731BDF00D7003A /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B36316731BDF00D7003A /* MapController.m */; };
 		0AE8B36E16731BDF00D7003A /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B36516731BDF00D7003A /* SettingsController.m */; };
 		0AE8B36F16731BDF00D7003A /* TaxSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B36716731BDF00D7003A /* TaxSheetController.m */; };
@@ -33,7 +36,7 @@
 		0AE8B3E516731C1000D7003A /* IH.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B37C16731C1000D7003A /* IH.m */; };
 		0AE8B3E616731C1000D7003A /* IITCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B37E16731C1000D7003A /* IITCalculator.m */; };
 		0AE8B3E716731C1000D7003A /* IITCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B37F16731C1000D7003A /* IITCalculator.xcdatamodeld */; };
-		0AE8B3E816731C1000D7003A /* IncomeDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B38216731C1000D7003A /* IncomeDetail.m */; };
+		0AE8B3E816731C1000D7003A /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B38216731C1000D7003A /* Statistics.m */; };
 		0AE8B3E916731C1000D7003A /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B38416731C1000D7003A /* Range.m */; };
 		0AE8B3EA16731C1000D7003A /* TaxRateSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B38616731C1000D7003A /* TaxRateSheet.m */; };
 		0AE8B3EB16731C1000D7003A /* WebSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B38816731C1000D7003A /* WebSite.m */; };
@@ -43,7 +46,6 @@
 		0AE8B3EF16731C1000D7003A /* BarBackButtonNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B38D16731C1000D7003A /* BarBackButtonNormal@2x.png */; };
 		0AE8B3F016731C1000D7003A /* BarButtonNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B38E16731C1000D7003A /* BarButtonNormal@2x.png */; };
 		0AE8B3F116731C1000D7003A /* BarButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B38F16731C1000D7003A /* BarButtonPressed@2x.png */; };
-		0AE8B3F216731C1000D7003A /* book_mask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B39016731C1000D7003A /* book_mask@2x.png */; };
 		0AE8B3F316731C1000D7003A /* CalcButtonNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B39116731C1000D7003A /* CalcButtonNormal@2x.png */; };
 		0AE8B3F416731C1000D7003A /* CalcButtonNormalPushed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B39216731C1000D7003A /* CalcButtonNormalPushed@2x.png */; };
 		0AE8B3F516731C1000D7003A /* Chevron@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B39316731C1000D7003A /* Chevron@2x.png */; };
@@ -96,7 +98,6 @@
 		0AE8B42416731C1000D7003A /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3CD16731C1000D7003A /* SVModalWebViewController.m */; };
 		0AE8B42516731C1000D7003A /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B3CE16731C1000D7003A /* SVWebViewController.bundle */; };
 		0AE8B42616731C1000D7003A /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3D016731C1000D7003A /* SVWebViewController.m */; };
-		0AE8B42716731C1000D7003A /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3D316731C1000D7003A /* XYPieChart.m */; };
 		0AE8B42816731C1000D7003A /* ZenKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3D616731C1000D7003A /* ZenKeyboard.m */; };
 		0AE8B42916731C1000D7003A /* ZenListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3D916731C1000D7003A /* ZenListView.m */; };
 		0AE8B42A16731C1000D7003A /* ZenTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3DC16731C1000D7003A /* ZenTextField.m */; };
@@ -105,6 +106,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A03C4E61678CF2A00729E09 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
+		0A03C4E71678CF2A00729E09 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
+		0A1D6E9316760A60005743D6 /* SDSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSegmentedControl.h; sourceTree = "<group>"; };
+		0A1D6E9416760A60005743D6 /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSegmentedControl.m; sourceTree = "<group>"; };
+		0A1D6E9D16761D05005743D6 /* StatisticsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsView.h; sourceTree = "<group>"; };
+		0A1D6E9E16761D05005743D6 /* StatisticsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsView.m; sourceTree = "<group>"; };
 		0A3616AD16292E5D00E0C6E9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0A5329731615C3C6006E3244 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0A8F8DB616106C68003FC311 /* IITCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IITCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,8 +134,8 @@
 		0AE8B35D16731BDF00D7003A /* HistoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryController.m; sourceTree = "<group>"; };
 		0AE8B35E16731BDF00D7003A /* IITCalculatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IITCalculatorController.h; sourceTree = "<group>"; };
 		0AE8B35F16731BDF00D7003A /* IITCalculatorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IITCalculatorController.m; sourceTree = "<group>"; };
-		0AE8B36016731BDF00D7003A /* IncomeDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeDetailController.h; sourceTree = "<group>"; };
-		0AE8B36116731BDF00D7003A /* IncomeDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeDetailController.m; sourceTree = "<group>"; };
+		0AE8B36016731BDF00D7003A /* StatisticsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsController.h; sourceTree = "<group>"; };
+		0AE8B36116731BDF00D7003A /* StatisticsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsController.m; sourceTree = "<group>"; };
 		0AE8B36216731BDF00D7003A /* MapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
 		0AE8B36316731BDF00D7003A /* MapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		0AE8B36416731BDF00D7003A /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
@@ -146,11 +153,11 @@
 		0AE8B37A16731C1000D7003A /* History.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		0AE8B37B16731C1000D7003A /* IH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IH.h; sourceTree = "<group>"; };
 		0AE8B37C16731C1000D7003A /* IH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IH.m; sourceTree = "<group>"; };
-		0AE8B37D16731C1000D7003A /* IITCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IITCalculator.h; sourceTree = "<group>"; };
-		0AE8B37E16731C1000D7003A /* IITCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IITCalculator.m; sourceTree = "<group>"; };
+		0AE8B37D16731C1000D7003A /* IITCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IITCalculator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0AE8B37E16731C1000D7003A /* IITCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 2; path = IITCalculator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0AE8B38016731C1000D7003A /* IITCalculator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IITCalculator.xcdatamodel; sourceTree = "<group>"; };
-		0AE8B38116731C1000D7003A /* IncomeDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeDetail.h; sourceTree = "<group>"; };
-		0AE8B38216731C1000D7003A /* IncomeDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeDetail.m; sourceTree = "<group>"; };
+		0AE8B38116731C1000D7003A /* Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Statistics.h; sourceTree = "<group>"; };
+		0AE8B38216731C1000D7003A /* Statistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Statistics.m; sourceTree = "<group>"; };
 		0AE8B38316731C1000D7003A /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Range.h; sourceTree = "<group>"; };
 		0AE8B38416731C1000D7003A /* Range.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Range.m; sourceTree = "<group>"; };
 		0AE8B38516731C1000D7003A /* TaxRateSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxRateSheet.h; sourceTree = "<group>"; };
@@ -163,7 +170,6 @@
 		0AE8B38D16731C1000D7003A /* BarBackButtonNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarBackButtonNormal@2x.png"; sourceTree = "<group>"; };
 		0AE8B38E16731C1000D7003A /* BarButtonNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarButtonNormal@2x.png"; sourceTree = "<group>"; };
 		0AE8B38F16731C1000D7003A /* BarButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BarButtonPressed@2x.png"; sourceTree = "<group>"; };
-		0AE8B39016731C1000D7003A /* book_mask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book_mask@2x.png"; sourceTree = "<group>"; };
 		0AE8B39116731C1000D7003A /* CalcButtonNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalcButtonNormal@2x.png"; sourceTree = "<group>"; };
 		0AE8B39216731C1000D7003A /* CalcButtonNormalPushed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalcButtonNormalPushed@2x.png"; sourceTree = "<group>"; };
 		0AE8B39316731C1000D7003A /* Chevron@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chevron@2x.png"; sourceTree = "<group>"; };
@@ -223,8 +229,6 @@
 		0AE8B3CE16731C1000D7003A /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVWebViewController.bundle; sourceTree = "<group>"; };
 		0AE8B3CF16731C1000D7003A /* SVWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewController.h; sourceTree = "<group>"; };
 		0AE8B3D016731C1000D7003A /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewController.m; sourceTree = "<group>"; };
-		0AE8B3D216731C1000D7003A /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
-		0AE8B3D316731C1000D7003A /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 		0AE8B3D516731C1000D7003A /* ZenKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZenKeyboard.h; sourceTree = "<group>"; };
 		0AE8B3D616731C1000D7003A /* ZenKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZenKeyboard.m; sourceTree = "<group>"; };
 		0AE8B3D816731C1000D7003A /* ZenListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZenListView.h; sourceTree = "<group>"; };
@@ -255,6 +259,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A1D6E9216760A60005743D6 /* SDSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				0A1D6E9316760A60005743D6 /* SDSegmentedControl.h */,
+				0A1D6E9416760A60005743D6 /* SDSegmentedControl.m */,
+			);
+			path = SDSegmentedControl;
+			sourceTree = "<group>";
+		};
 		0A8F8DAB16106C68003FC311 = {
 			isa = PBXGroup;
 			children = (
@@ -324,8 +337,8 @@
 				0AE8B35D16731BDF00D7003A /* HistoryController.m */,
 				0AE8B35E16731BDF00D7003A /* IITCalculatorController.h */,
 				0AE8B35F16731BDF00D7003A /* IITCalculatorController.m */,
-				0AE8B36016731BDF00D7003A /* IncomeDetailController.h */,
-				0AE8B36116731BDF00D7003A /* IncomeDetailController.m */,
+				0AE8B36016731BDF00D7003A /* StatisticsController.h */,
+				0AE8B36116731BDF00D7003A /* StatisticsController.m */,
 				0AE8B36216731BDF00D7003A /* MapController.h */,
 				0AE8B36316731BDF00D7003A /* MapController.m */,
 				0AE8B36416731BDF00D7003A /* SettingsController.h */,
@@ -360,8 +373,8 @@
 				0AE8B37D16731C1000D7003A /* IITCalculator.h */,
 				0AE8B37E16731C1000D7003A /* IITCalculator.m */,
 				0AE8B37F16731C1000D7003A /* IITCalculator.xcdatamodeld */,
-				0AE8B38116731C1000D7003A /* IncomeDetail.h */,
-				0AE8B38216731C1000D7003A /* IncomeDetail.m */,
+				0AE8B38116731C1000D7003A /* Statistics.h */,
+				0AE8B38216731C1000D7003A /* Statistics.m */,
 				0AE8B38316731C1000D7003A /* Range.h */,
 				0AE8B38416731C1000D7003A /* Range.m */,
 				0AE8B38516731C1000D7003A /* TaxRateSheet.h */,
@@ -381,7 +394,6 @@
 				0AE8B38D16731C1000D7003A /* BarBackButtonNormal@2x.png */,
 				0AE8B38E16731C1000D7003A /* BarButtonNormal@2x.png */,
 				0AE8B38F16731C1000D7003A /* BarButtonPressed@2x.png */,
-				0AE8B39016731C1000D7003A /* book_mask@2x.png */,
 				0AE8B39116731C1000D7003A /* CalcButtonNormal@2x.png */,
 				0AE8B39216731C1000D7003A /* CalcButtonNormalPushed@2x.png */,
 				0AE8B39316731C1000D7003A /* Chevron@2x.png */,
@@ -434,8 +446,9 @@
 			children = (
 				0AE8B3BD16731C1000D7003A /* Addition */,
 				0AE8B3C416731C1000D7003A /* iRate */,
-				0AE8B3C816731C1000D7003A /* MBProgressHUD */,
+				0A1D6E9216760A60005743D6 /* SDSegmentedControl */,
 				0AE8B3CB16731C1000D7003A /* SVWebViewController */,
+				0AE8B3C816731C1000D7003A /* MBProgressHUD */,
 				0AE8B3D116731C1000D7003A /* XYPieChart */,
 				0AE8B3D416731C1000D7003A /* ZenKeyboard */,
 				0AE8B3D716731C1000D7003A /* ZenListView */,
@@ -491,8 +504,8 @@
 		0AE8B3D116731C1000D7003A /* XYPieChart */ = {
 			isa = PBXGroup;
 			children = (
-				0AE8B3D216731C1000D7003A /* XYPieChart.h */,
-				0AE8B3D316731C1000D7003A /* XYPieChart.m */,
+				0A03C4E61678CF2A00729E09 /* XYPieChart.h */,
+				0A03C4E71678CF2A00729E09 /* XYPieChart.m */,
 			);
 			path = XYPieChart;
 			sourceTree = "<group>";
@@ -527,6 +540,8 @@
 		0AE8B3DD16731C1000D7003A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0A1D6E9D16761D05005743D6 /* StatisticsView.h */,
+				0A1D6E9E16761D05005743D6 /* StatisticsView.m */,
 				0AE8B3DE16731C1000D7003A /* HistoryCell.h */,
 				0AE8B3DF16731C1000D7003A /* HistoryCell.m */,
 				0AE8B3E016731C1000D7003A /* MainStoryboard.storyboard */,
@@ -594,7 +609,6 @@
 				0AE8B3EF16731C1000D7003A /* BarBackButtonNormal@2x.png in Resources */,
 				0AE8B3F016731C1000D7003A /* BarButtonNormal@2x.png in Resources */,
 				0AE8B3F116731C1000D7003A /* BarButtonPressed@2x.png in Resources */,
-				0AE8B3F216731C1000D7003A /* book_mask@2x.png in Resources */,
 				0AE8B3F316731C1000D7003A /* CalcButtonNormal@2x.png in Resources */,
 				0AE8B3F416731C1000D7003A /* CalcButtonNormalPushed@2x.png in Resources */,
 				0AE8B3F516731C1000D7003A /* Chevron@2x.png in Resources */,
@@ -656,7 +670,7 @@
 				0AE8B36816731BDF00D7003A /* AboutController.m in Sources */,
 				0AE8B36A16731BDF00D7003A /* HistoryController.m in Sources */,
 				0AE8B36B16731BDF00D7003A /* IITCalculatorController.m in Sources */,
-				0AE8B36C16731BDF00D7003A /* IncomeDetailController.m in Sources */,
+				0AE8B36C16731BDF00D7003A /* StatisticsController.m in Sources */,
 				0AE8B36D16731BDF00D7003A /* MapController.m in Sources */,
 				0AE8B36E16731BDF00D7003A /* SettingsController.m in Sources */,
 				0AE8B36F16731BDF00D7003A /* TaxSheetController.m in Sources */,
@@ -667,7 +681,7 @@
 				0AE8B3E516731C1000D7003A /* IH.m in Sources */,
 				0AE8B3E616731C1000D7003A /* IITCalculator.m in Sources */,
 				0AE8B3E716731C1000D7003A /* IITCalculator.xcdatamodeld in Sources */,
-				0AE8B3E816731C1000D7003A /* IncomeDetail.m in Sources */,
+				0AE8B3E816731C1000D7003A /* Statistics.m in Sources */,
 				0AE8B3E916731C1000D7003A /* Range.m in Sources */,
 				0AE8B3EA16731C1000D7003A /* TaxRateSheet.m in Sources */,
 				0AE8B3EB16731C1000D7003A /* WebSite.m in Sources */,
@@ -678,11 +692,13 @@
 				0AE8B42316731C1000D7003A /* MBProgressHUD.m in Sources */,
 				0AE8B42416731C1000D7003A /* SVModalWebViewController.m in Sources */,
 				0AE8B42616731C1000D7003A /* SVWebViewController.m in Sources */,
-				0AE8B42716731C1000D7003A /* XYPieChart.m in Sources */,
 				0AE8B42816731C1000D7003A /* ZenKeyboard.m in Sources */,
 				0AE8B42916731C1000D7003A /* ZenListView.m in Sources */,
 				0AE8B42A16731C1000D7003A /* ZenTextField.m in Sources */,
 				0AE8B42B16731C1000D7003A /* HistoryCell.m in Sources */,
+				0A1D6E9516760A60005743D6 /* SDSegmentedControl.m in Sources */,
+				0A1D6E9F16761D05005743D6 /* StatisticsView.m in Sources */,
+				0A03C4E81678CF2A00729E09 /* XYPieChart.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

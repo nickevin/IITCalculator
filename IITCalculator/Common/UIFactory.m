@@ -14,10 +14,10 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = frame;
 //    button.backgroundColor = RGB(175, 212, 236);
-    button.layer.borderColor = [UIColor clearColor].CGColor;
-    button.layer.borderWidth = 0.0f;
-    button.layer.cornerRadius = 3.0f;
-    button.tintColor = RGB(175, 212, 236);
+//    button.layer.borderColor = [UIColor clearColor].CGColor;
+//    button.layer.borderWidth = 0.0f;
+//    button.layer.cornerRadius = 3.0f;
+//    button.tintColor = RGB(175, 212, 236);
     button.titleEdgeInsets = UIEdgeInsetsMake(2, 5, 2, 5);
     button.titleLabel.lineBreakMode = UILineBreakModeWordWrap | UILineBreakModeTailTruncation;
 //    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

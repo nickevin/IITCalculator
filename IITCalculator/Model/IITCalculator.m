@@ -13,34 +13,26 @@
 #import "IH.h"
 #import "City.h"
 #import "TaxRateSheet.h"
-#import "History.h"
 
 @implementation IITCalculator {
-    
-    AppDelegate *appDelegate;
-    NSManagedObjectContext *managedObjectContext;
+
 }
 
 - (id)init {
     if (self = [super init]) {
-        _config = [[NSMutableDictionary alloc]init];
+        _config = [[NSMutableDictionary alloc] initWithCapacity:40];
         
         [self initConfig];
-        
-        appDelegate = [[UIApplication sharedApplication] delegate];
-        managedObjectContext = appDelegate.managedObjectContext;
-        
+
         return self;
     }
     
     return nil;
 }
 
-- (IncomeDetail *)calc:(double)preTaxIncome
+- (Statistics *)calc:(double)preTaxIncome
                   city:(NSString *)name
-             threshold:(double)threshold
-                   pmu:(double)pmu
-           housingFund:(double)housingFund {
+                  mode:(int)mode {
     City *city = [_config objectForKey:name];    
     NSLog(@"----- ----- ----- ----- ----- ----- ----- ----- ----- ----- -----");
     NSLog(@"税前收入: %f, 城市: %@", preTaxIncome, name);
@@ -54,58 +46,83 @@
     
     double incomePMU = preTaxIncome;
     double incomeH = preTaxIncome;
+    
+    double threshold = kThreshold;
+    
+    double pmu = 0.00;
+    double housingFund = 0.00;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *plistPath = [path stringByAppendingPathComponent:@"user-settings.plist"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        pmu = [[map valueForKey:@"pmu"] doubleValue];
+        housingFund = [[map valueForKey:@"housingFund"] doubleValue];
+    } else {
+        NSMutableDictionary *map =[[NSMutableDictionary alloc]init];
+        [map setValue:[NSNumber numberWithDouble:pmu] forKey:@"pmu"];
+        [map setValue:[NSNumber numberWithDouble:housingFund] forKey:@"housingFund"];
+        [map writeToFile:plistPath atomically:YES];
+    }
         
-    if (pmu == -1 || housingFund == -1) {
-        if (preTaxIncome <= lowerPMU) {
+    if (pmu == 0.00) {
+        if (preTaxIncome < lowerPMU) {
             incomePMU = lowerPMU;
-        } else if (preTaxIncome >= upperPMU) {
+        } else if (preTaxIncome > upperPMU) {
             incomePMU = upperPMU;
-        }
-        
-        if (preTaxIncome <= lowerH) {
-            incomeH = lowerH;
-        } else if (preTaxIncome >= upperH) {
-            incomeH = upperH;
         }
     } else { // 自定义缴费基数
         incomePMU = pmu;
-        incomeH = housingFund;
     }
     
-    IH *ih = city.iH;
+    if (housingFund == 0.00) {
+        if (preTaxIncome < lowerH) {
+            incomeH = lowerH;
+        } else if (preTaxIncome > upperH) {
+            incomeH = upperH;
+        }
+    } else { // 自定义缴费基数
+        incomeH = housingFund;
+    }
+        
+    IH *ih = nil;
+    if (mode == 0) {
+        ih = city.iH;
+    } else {
+        ih = city.iHEnterprise;
+    }
     
     double pensionAmount = incomePMU * ih.pension;
     double medicalCareAmount = incomePMU * ih.medicalCare;
     double unemploymentAmount = incomePMU * ih.unemployment;
+    double industrialInjuryAmount = incomePMU * ih.industrialInjury;
+    double pregnancyAmount = incomePMU * ih.pregnancy;
     double basicHousingFundAmount = incomeH * ih.basicHousingFund;
-    double totalAmount = pensionAmount + medicalCareAmount + unemploymentAmount + basicHousingFundAmount;
+    double totalAmount = pensionAmount + medicalCareAmount + unemploymentAmount + industrialInjuryAmount + pregnancyAmount + basicHousingFundAmount;
     
     // 扣除五险一金
-    double amountWithoutIH = preTaxIncome - pensionAmount - medicalCareAmount - unemploymentAmount - basicHousingFundAmount;
-    SysLog(@"扣除五险一金: %f - %f * (%f + %f + %f) - %f * (%f) = %f", preTaxIncome, incomePMU, ih.pension, ih.medicalCare, ih.unemployment, incomeH, ih.basicHousingFund, amountWithoutIH);
+    double amountWithoutIH = preTaxIncome -  incomePMU * (city.iH.pension + city.iH.medicalCare + city.iH.unemployment + city.iH.industrialInjury + city.iH.industrialInjury + city.iH.pregnancy) - incomeH * city.iH.basicHousingFund;
+    SysLog(@"扣除五险一金: %f - %f * (%f + %f + %f + %f + %f) - %f * (%f) = %f", preTaxIncome, incomePMU, city.iH.pension, city.iH.medicalCare, city.iH.unemployment, city.iH.industrialInjury, city.iH.pregnancy, incomeH, ih.basicHousingFund, amountWithoutIH);
     
     if (amountWithoutIH < threshold) {
         SysLog(@"税后收入: %f", amountWithoutIH);
         SysLog(@"");
                 
-        IncomeDetail *incomeDetail = [[IncomeDetail alloc]initWithCity:city
+        Statistics *statistics = [[Statistics alloc]initWithCity:city
                                                           preTaxIncome:preTaxIncome
                                                         afterTaxIncome:amountWithoutIH
                                                          taxableAmount:0
                                                                    tax:0
-//                                                               pension:ih.pension
-//                                                           medicalCare:ih.medicalCare
-//                                                          unemployment:ih.unemployment
-//                                                      basicHousingFund:ih.basicHousingFund
                                                          pensionAmount:pensionAmount
                                                      medicalCareAmount:medicalCareAmount
                                                     unemploymentAmount:unemploymentAmount
+                                                industrialInjuryAmount:industrialInjuryAmount
+                                                       pregnancyAmount:pregnancyAmount
                                                 basicHousingFundAmount:basicHousingFundAmount
                                                            totalAmount:totalAmount];
         
-        [self saveHistory:incomeDetail];
-        
-        return incomeDetail;
+        return statistics;
     }
     
     // 应税金额: 扣除五险一金 - 起征点
@@ -125,70 +142,67 @@
     SysLog(@"税后收入: %f - %f = %f", amountWithoutIH, tax, afterTaxIncome);
     SysLog(@"");
     
-    IncomeDetail *incomeDetail = [[IncomeDetail alloc]initWithCity:city
+    Statistics *statistics = [[Statistics alloc]initWithCity:city
                                                       preTaxIncome:preTaxIncome
                                                     afterTaxIncome:afterTaxIncome
                                                      taxableAmount:taxableAmount
                                                                tax:tax
-//                                                           pension:ih.pension
-//                                                       medicalCare:ih.medicalCare
-//                                                      unemployment:ih.unemployment
-//                                                  basicHousingFund:ih.basicHousingFund
                                                      pensionAmount:pensionAmount
                                                  medicalCareAmount:medicalCareAmount
                                                 unemploymentAmount:unemploymentAmount
+                                            industrialInjuryAmount:industrialInjuryAmount
+                                                   pregnancyAmount:pregnancyAmount
                                             basicHousingFundAmount:basicHousingFundAmount
                                                        totalAmount:totalAmount];
     
-    [self saveHistory:incomeDetail];
-    
-    return incomeDetail;
-}
-
-- (void)saveHistory:(IncomeDetail *)incomeDetail {
-    History *history = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:managedObjectContext];
-    if (history == nil) {
-        SysLog(@"Failed to create the new entity.");
-    }
-    
-    history.preTaxIncome = [NSNumber numberWithDouble:incomeDetail.preTaxIncome];
-    history.afterTaxIncome = [NSNumber numberWithDouble:incomeDetail.afterTaxIncome];
-    history.tax = [NSNumber numberWithDouble:incomeDetail.tax];
-    history.city = incomeDetail.city.name;
-    history.createTime = [NSDate date];
-    
-    [appDelegate saveContext];
+    return statistics;
 }
 
 - (void)initConfig {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"city" ofType:@"plist"];
-    NSMutableArray *cities = [[NSMutableArray alloc] initWithContentsOfFile:path];
+    NSArray *cities = [[NSArray alloc] initWithContentsOfFile:path];
         
     for (NSDictionary *item in cities) {
         NSString *name = [item objectForKey:@"name"];
         NSString *region = [item objectForKey:@"region"];
-        double latitude = [[item objectForKey:@"latitude"] doubleValue];
-        double longitude = [[item objectForKey:@"longitude"] doubleValue];
-        double lowerPMU = [[item objectForKey:@"lowerPMU"] doubleValue];
-        double upperPMU = [[item objectForKey:@"upperPMU"] doubleValue];
-        double lowerH = [[item objectForKey:@"lowerH"] doubleValue];
-        double upperH = [[item objectForKey:@"upperH"] doubleValue];
-        double pension = [[item objectForKey:@"pension"] doubleValue];
-        double medicalCare = [[item objectForKey:@"medicalCare"] doubleValue];
-        double unemployment = [[item objectForKey:@"unemployment"] doubleValue];
-        double basicHousingFund = [[item objectForKey:@"basicHousingFund"] doubleValue];
-        NSString *websiteName = [item objectForKey:@"websiteName"];
-        NSString *websiteURL = [item objectForKey:@"websiteURL"];
-        NSString *websiteName2 = [item objectForKey:@"websiteName2"];
-        NSString *websiteURL2 = [item objectForKey:@"websiteURL2"];
+        
+        NSDictionary *coordinate = (NSDictionary *)[item objectForKey:@"coordinate"];
+        double latitude = [[coordinate objectForKey:@"latitude"] doubleValue];
+        double longitude = [[coordinate objectForKey:@"longitude"] doubleValue];
 
-        City *city = [[City alloc]initWithName:name region:region coordinate:CLLocationCoordinate2DMake(latitude, longitude)];
-        city.rangePMU = [[Range alloc]initWithLower:lowerPMU upper:upperPMU];
-        city.rangeH = [[Range alloc]initWithLower:lowerH upper:upperH];
-        city.iH = [[IH alloc]initWithPension:pension medicalCare:medicalCare unemployment:unemployment industrialInjury:0 pregnancy:0 basicHousingFund:basicHousingFund];
-        city.websites = [NSMutableArray arrayWithObjects:
-                        [[WebSite alloc]initWithName:websiteName url:websiteURL],
-                        [[WebSite alloc]initWithName:websiteName2 url:websiteURL2], nil];
+        City *city = [[City alloc]initWithName:name
+                                        region:region
+                                    coordinate:CLLocationCoordinate2DMake(latitude, longitude)];
+        
+        NSDictionary *range = (NSDictionary *)[item objectForKey:@"range"];
+        double lowerPMU = [[range objectForKey:@"lowerPMU"] doubleValue];
+        double upperPMU = [[range objectForKey:@"upperPMU"] doubleValue];
+        double lowerH = [[range objectForKey:@"lowerH"] doubleValue];
+        double upperH = [[range objectForKey:@"upperH"] doubleValue];
+        city.rangePMU = [[Range alloc] initWithLower:lowerPMU upper:upperPMU];
+        city.rangeH = [[Range alloc] initWithLower:lowerH upper:upperH];
+        
+        NSDictionary *individual = (NSDictionary *)[item objectForKey:@"individual"];
+        city.iH = [[IH alloc] initWithPension:[[individual objectForKey:@"pension"] doubleValue]
+                                  medicalCare:[[individual objectForKey:@"medicalCare"] doubleValue]
+                                 unemployment:[[individual objectForKey:@"unemployment"] doubleValue]
+                             industrialInjury:0
+                                    pregnancy:0
+                             basicHousingFund:[[individual objectForKey:@"basicHousingFund"] doubleValue]];
+                             
+        NSDictionary *enterprise = (NSDictionary *)[item objectForKey:@"enterprise"];
+        city.iHEnterprise = [[IH alloc] initWithPension:[[enterprise objectForKey:@"pension"] doubleValue]
+                                            medicalCare:[[enterprise objectForKey:@"medicalCare"] doubleValue]
+                                           unemployment:[[enterprise objectForKey:@"unemployment"] doubleValue]
+                                       industrialInjury:[[enterprise objectForKey:@"industrialInjury"] doubleValue]
+                                              pregnancy:[[enterprise objectForKey:@"pregnancy"] doubleValue]
+                                       basicHousingFund:[[enterprise objectForKey:@"basicHousingFund"] doubleValue]];
+        
+        NSDictionary *info = (NSDictionary *)[item objectForKey:@"info"];
+        city.info = @[[[WebSite alloc] initWithName:[info objectForKey:@"websiteName"]
+                                                    url:[info objectForKey:@"websiteURL"]],
+                          [[WebSite alloc] initWithName:[info objectForKey:@"websiteName2"]
+                                                    url:[info objectForKey:@"websiteURL2"]]];
         
         [_config setValue:city forKey:city.name];
     }

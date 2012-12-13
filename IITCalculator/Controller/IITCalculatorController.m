@@ -7,8 +7,17 @@
 //
 
 #import "IITCalculatorController.h"
+#import "History.h"
 
-@interface IITCalculatorController ()
+
+@interface IITCalculatorController () {
+    
+    AppDelegate *appDelegate;
+    NSManagedObjectContext *managedObjectContext;
+
+}
+
+@property (nonatomic, strong) MapController *mapController;
 
 @end
 
@@ -20,11 +29,12 @@
 {
     [super viewDidLoad];
     
+    [self initCoreData];
     [self initUI];
     [self initSettings];
 
-    _calculator = [[IITCalculator alloc]init];
-    
+    _calculator = [[IITCalculator alloc] init];
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(dismissSemiModalView:)
                                                  name:kSemiModalDidHideNotification
@@ -32,6 +42,11 @@
     
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 
+}
+
+- (void)initCoreData {
+    appDelegate = [[UIApplication sharedApplication] delegate];
+    managedObjectContext = appDelegate.managedObjectContext;
 }
 
 - (void)initUI {    
@@ -141,19 +156,7 @@
 - (void)initSettings {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
-    NSString *plistPath = [path stringByAppendingPathComponent:@"user-settings.plist"];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-        NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        _pmu = [[map valueForKey:@"pmu"] doubleValue];
-        _housingFund = [[map valueForKey:@"housingFund"] doubleValue];
-    } else {        
-        NSMutableDictionary *map =[[NSMutableDictionary alloc]init];
-        [map setValue:[NSNumber numberWithDouble:_pmu] forKey:@"pmu"];
-        [map setValue:[NSNumber numberWithDouble:_housingFund] forKey:@"housingFund"];
-        [map writeToFile:plistPath atomically:YES];
-    }
-    
-    plistPath = [path stringByAppendingPathComponent:@"user-data.plist"];
+    NSString *plistPath = [path stringByAppendingPathComponent:@"user-data.plist"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
         _tfPreTaxIncome.text = [FormatUtils formatCurrency:[[map valueForKey:@"preTaxIncome"] doubleValue]];
@@ -173,15 +176,26 @@
 - (void)calculate {
     [self writeToPlist];
     
-    IncomeDetailController *detailController = nil;
-    
-    if (_pmu == 0.00 && _housingFund == 0.00) {
-        detailController = [[IncomeDetailController alloc] initWithIncomeDetail:[_calculator calc:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text] city:_lbCity.titleLabel.text threshold:kThreshold pmu:-1 housingFund:-1]];
-    } else {
-        detailController = [[IncomeDetailController alloc] initWithIncomeDetail:[_calculator calc:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text] city:_lbCity.titleLabel.text threshold:kThreshold pmu:_pmu housingFund:_housingFund]];
+    Statistics *statistics = [_calculator calc:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text] city:_lbCity.titleLabel.text mode:0];
+    [self saveHistory:statistics];
+       	
+    StatisticsController *controller = [[StatisticsController alloc] initWithIITCalculator:_calculator statistics:statistics];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)saveHistory:(Statistics *)statistics {
+    History *history = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:managedObjectContext];
+    if (history == nil) {
+        SysLog(@"Failed to create the new entity.");
     }
     
-    [self.navigationController pushViewController:detailController animated:YES];
+    history.preTaxIncome = [NSNumber numberWithDouble:statistics.preTaxIncome];
+    history.afterTaxIncome = [NSNumber numberWithDouble:statistics.afterTaxIncome];
+    history.tax = [NSNumber numberWithDouble:statistics.tax];
+    history.city = statistics.city.name;
+    history.createTime = [NSDate date];
+    
+    [appDelegate saveContext];
 }
 
 - (void)dismissSemiModalView:(NSNotification *) notification {
@@ -198,11 +212,11 @@
 - (void)presentMapController {
     [_tfPreTaxIncome resignFirstResponder];
     
-    mapController = [[MapController alloc] initWithConfig:_calculator.config];
-    mapController.currentCity = _lbCity.titleLabel.text;
-    mapController.delegate = self;
+    _mapController = [[MapController alloc] initWithConfig:_calculator.config];
+    _mapController.currentCity = _lbCity.titleLabel.text;
+    _mapController.delegate = self;
 
-    [self presentSemiViewController:mapController withOptions:@{
+    [self presentSemiViewController:_mapController withOptions:@{
         KNSemiModalOptionKeys.pushParentBack    : @(YES),
         KNSemiModalOptionKeys.animationDuration : @(0.5),
         KNSemiModalOptionKeys.shadowOpacity     : @(0.3),
@@ -216,7 +230,6 @@
 
 - (void)presentSettingsController {
     SettingsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsController"];
-    controller.delegate = self;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -248,15 +261,8 @@
     [_lbCity setTitle:city.name forState:UIControlStateNormal];
 }
 
-#pragma mark - SettingsControllerDelegate
-
-- (void)settingsDidChangeWithPMU:(double)pmu housingFund:(double)housingFund {
-    _pmu = pmu;
-    _housingFund = housingFund;
-}
-
 - (void)viewDidUnload {
-    mapController = nil;
+    self.mapController = nil;
     self.calculator = nil;
     self.keyboardView = nil;
     self.lbCity = nil;

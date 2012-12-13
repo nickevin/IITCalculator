@@ -14,15 +14,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         UIImage *separatorLine = [UIImage imageNamed:@"ListSeparatorLine"];
-        UIImageView *separatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, separatorLine.size.width, separatorLine.size.height)];
+        UIImageView *separatorLineView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 45, separatorLine.size.width, separatorLine.size.height)];
         separatorLineView.image = separatorLine;
-        
+                
         UIImage *listTop = [UIImage imageNamed:@"ListTop"];
-        UIImageView *listTopView = [[UIImageView alloc] initWithFrame:CGRectMake((320 - listTop.size.width) / 2, frame.origin.y + 15, listTop.size.width, listTop.size.height)];
+        UIImageView *listTopView = [[UIImageView alloc] initWithFrame:CGRectMake((320 - listTop.size.width) / 2, separatorLineView.frame.origin.y + 15, listTop.size.width, listTop.size.height)];
         listTopView.image = listTop;
         
         UIImage *listBackground = [UIImage imageNamed:@"ListBackground"];
-        UIImageView *listBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake((320 - listBackground.size.width) / 2, listTopView.frame.origin.y + 6, listBackground.size.width, frame.size.height)];
+        UIImageView *listBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake((320 - listBackground.size.width) / 2, listTopView.frame.origin.y + 6, listBackground.size.width, frame.size.height - 80)];
         listBackgroundView.backgroundColor = [UIColor colorWithPatternImage:listBackground];
         
         UIImage *listBottom = [UIImage imageNamed:@"ListBottom"];
@@ -37,14 +37,5 @@
     
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

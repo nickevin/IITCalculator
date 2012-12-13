@@ -15,10 +15,14 @@
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 #import <MessageUI/MessageUI.h>
+
+#import "AppDelegate.h"
 #import "Config.h"
 #import "FormatUtils.h"
 #import "UIFactory.h"
+#import "XYPieChart.h"
 #import "ZenKeyboard.h"
+#import "ZenListView.h"
 #import "ZenTextField.h"
 #import "UIViewController+KNSemiModal.h"
 #endif

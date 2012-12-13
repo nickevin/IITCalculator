@@ -23,8 +23,8 @@
 
 @property (nonatomic, weak) id<MapControllerDelegate> delegate;
 @property (nonatomic, copy) NSString *currentCity;
-@property (nonatomic, strong) NSMutableDictionary *config;
+@property (nonatomic, strong) NSDictionary *config;
 
-- (id)initWithConfig:(NSMutableDictionary *)config;
+- (id)initWithConfig:(NSDictionary *)config;
 
 @end

@@ -18,7 +18,7 @@
 
 @implementation MapController
 
-- (id)initWithConfig:(NSMutableDictionary *)config {
+- (id)initWithConfig:(NSDictionary *)config {
     if (self = [super init]) {
         _config = config;
     }
@@ -76,6 +76,8 @@
 }
 
 - (void)setMapView {
+    NSLog(@"%@", _currentCity);
+    
     if (_currentCity) {
         City *city = [_config objectForKey:_currentCity];
         CLLocationCoordinate2D centerCoord = {city.coordinate.latitude, city.coordinate.longitude};

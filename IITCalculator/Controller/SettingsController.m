@@ -112,8 +112,7 @@
     
     [self writeToPlist];
     
-    [self.delegate settingsDidChangeWithPMU:[FormatUtils formatDoubleWithCurrency:_tfPMU.text]
-                                housingFund:[FormatUtils formatDoubleWithCurrency:_tfHousingFund.text]];
+//    [self.delegate settingsDidChangeWithPMU:[FormatUtils formatDoubleWithCurrency:_tfPMU.text] housingFund:[FormatUtils formatDoubleWithCurrency:_tfHousingFund.text]];
 }
 
 - (void)writeToPlist {

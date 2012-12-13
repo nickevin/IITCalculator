@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-#import "IncomeDetailController.h"
+#import "StatisticsController.h"
 #import "MapController.h"
 #import "SettingsController.h"
 #import "HistoryController.h"
 
 #import "IITCalculator.h"
 
-@interface IITCalculatorController : UIViewController <UITextFieldDelegate, MapControllerDelegate, SettingsControllerDelegate> {
+@interface IITCalculatorController : UIViewController <UITextFieldDelegate, MapControllerDelegate> {
 
-    MapController *mapController;
 }
 
 // outlets
@@ -26,7 +25,5 @@
 @property (nonatomic, strong) UIButton *lbCity;
 
 @property (nonatomic, strong) IITCalculator *calculator;
-@property (nonatomic, assign) double pmu;
-@property (nonatomic, assign) double housingFund;
 
 @end
