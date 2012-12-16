@@ -14,7 +14,7 @@
     
     AppDelegate *appDelegate;
     NSManagedObjectContext *managedObjectContext;
-
+    
 }
 
 @property (nonatomic, strong) MapController *mapController;
@@ -22,26 +22,29 @@
 @end
 
 @implementation IITCalculatorController {
-
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self initCoreData];
     [self initUI];
     [self initSettings];
-
-    _calculator = [[IITCalculator alloc] init];
-
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+        [self initCoreData];
+        _calculator = [[IITCalculator alloc] init];
+    });
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(dismissSemiModalView:)
                                                  name:kSemiModalDidHideNotification
                                                object:nil];
     
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-
+    
 }
 
 - (void)initCoreData {
@@ -49,7 +52,7 @@
     managedObjectContext = appDelegate.managedObjectContext;
 }
 
-- (void)initUI {    
+- (void)initUI {
     UIImage * backgroundImage = [UIImage imageNamed:@"BackgroundTexture"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     
@@ -75,14 +78,14 @@
     _tfPreTaxIncome = [[ZenTextField alloc] initWithFrame:CGRectMake(100, 5, 200, 60)];
     [_tfPreTaxIncome setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:55.0f]];
     _tfPreTaxIncome.textColor = RGB(104, 114, 121);
-//    _tfPreTaxIncome.backgroundColor = [UIColor lightGrayColor];
+    //    _tfPreTaxIncome.backgroundColor = [UIColor lightGrayColor];
     _tfPreTaxIncome.textAlignment = UITextAlignmentRight;
     _tfPreTaxIncome.adjustsFontSizeToFitWidth = YES;
-//    _tfPreTaxIncome.clearButtonMode = UITpextFieldViewModeWhileEditing;
-//    _tfPreTaxIncome.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TotalAmount"]];
-//    _tfPreTaxIncome.leftViewMode = UITextFieldViewModeAlways;
+    //    _tfPreTaxIncome.clearButtonMode = UITpextFieldViewModeWhileEditing;
+    //    _tfPreTaxIncome.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"TotalAmount"]];
+    //    _tfPreTaxIncome.leftViewMode = UITextFieldViewModeAlways;
     _tfPreTaxIncome.delegate = self;
-//    _tfPreTaxIncome.keyboardType = UIKeyboardTypeDecimalPad;
+    //    _tfPreTaxIncome.keyboardType = UIKeyboardTypeDecimalPad;
     
     _keyboardView = [[ZenKeyboard alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
     _keyboardView.textField = _tfPreTaxIncome;
@@ -97,20 +100,21 @@
     
     _lbCity = [UIFactory createLinkButtonWithFrame:CGRectMake(30, 87, 250, 40)];
     [_lbCity setTitle:@"" forState:UIControlStateNormal];
-//    _lbCity.backgroundColor = [UIColor lightGrayColor];
+    //    _lbCity.backgroundColor = [UIColor lightGrayColor];
     [_lbCity.titleLabel setFont:[UIFont fontWithName:HEITI_SC_MEDIUM size:38.0f]];
     _lbCity.titleLabel.shadowColor = [UIColor whiteColor];
     _lbCity.titleLabel.shadowOffset = CGSizeMake(0, 1);
-//    _lbCity.textAlignment = UITextAlignmentRight;
-//    _lbCity.textColor = RGB(104, 114, 121);
+    //    _lbCity.textAlignment = UITextAlignmentRight;
+    //    _lbCity.textColor = RGB(104, 114, 121);
     [_lbCity setTitleColor:RGB(104, 114, 121) forState:UIControlStateNormal];
     _lbCity.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [_lbCity addTarget:self action:@selector(presentMapController) forControlEvents:UIControlEventTouchUpInside];
-
+    
     UIButton *btnChevron = [UIFactory createButtonWithFrame:CGRectMake(290, 98, 14, 21) normalBackground:[UIImage imageNamed:@"Chevron"] highlightedBackground:nil];
     [btnChevron addTarget:self action:@selector(presentMapController) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *calcButton = [self createCalcButton];
+    
     
     [self.view addSubview:shadowView];
     [self.view addSubview:separatorLine];
@@ -130,7 +134,7 @@
                                                                             action:nil];
 }
 
-- (UIButton *)createCalcButton {    
+- (UIButton *)createCalcButton {
     UIButton *calcButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *buttonImage = [[UIImage imageNamed:@"CalcButtonNormal"] resizableImageWithCapInsets:UIEdgeInsetsMake(7, 7, 0, 7)];
     UIImage *buttonPressedImage = [[UIImage imageNamed:@"CalcButtonNormalPushed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 7, 0, 7)];
@@ -178,8 +182,9 @@
     
     Statistics *statistics = [_calculator calc:[FormatUtils formatDoubleWithCurrency:_tfPreTaxIncome.text] city:_lbCity.titleLabel.text mode:0];
     [self saveHistory:statistics];
-       	
+    
     StatisticsController *controller = [[StatisticsController alloc] initWithIITCalculator:_calculator statistics:statistics];
+    
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -215,11 +220,11 @@
     _mapController = [[MapController alloc] initWithConfig:_calculator.config];
     _mapController.currentCity = _lbCity.titleLabel.text;
     _mapController.delegate = self;
-
+    
     [self presentSemiViewController:_mapController withOptions:@{
-        KNSemiModalOptionKeys.pushParentBack    : @(YES),
-        KNSemiModalOptionKeys.animationDuration : @(0.5),
-        KNSemiModalOptionKeys.shadowOpacity     : @(0.3),
+     KNSemiModalOptionKeys.pushParentBack    : @(YES),
+     KNSemiModalOptionKeys.animationDuration : @(0.5),
+     KNSemiModalOptionKeys.shadowOpacity     : @(0.3),
      }];
 }
 
@@ -275,7 +280,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)writeToPlist {    
+- (void)writeToPlist {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
     NSString *plistPath = [path stringByAppendingPathComponent:@"user-data.plist"];

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define CELL_HEIGHT     100
+
 @interface HistoryCell : UITableViewCell
 
 @property (strong, nonatomic) UILabel *lbCity;

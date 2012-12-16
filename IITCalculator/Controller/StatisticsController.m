@@ -42,7 +42,9 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self reloadStatistics];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.25 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+        [self reloadStatistics];
+    });
 }
 
 - (void)reloadStatistics {
@@ -74,25 +76,27 @@
     UIImageView *shadowView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -3, 320, 6)];
     shadowView.image = shadow;
     
-    CGFloat contentHeight = [UIScreen mainScreen].bounds.size.height == 568 ? self.view.frame.size.height * 2 : self.view.frame.size.height * 2.4;
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44)];
-    _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, contentHeight);
-    
-    _statisticsView = [[StatisticsView alloc] initWithFrame:CGRectMake(0, 0, 320, contentHeight)];
-    
-    [self.view addSubview:shadowView];
-    [self.view addSubview:_scrollView];
-    [self initSegmentedControlUI];
-    [_scrollView addSubview:_statisticsView];
-    
-    self.sliceColors = @[RGB(246, 155, 0), RGB(129, 195, 29), RGB(62, 173, 219), RGB(232, 89, 70),
-                        RGB(148, 141, 139), RGB(229, 66, 115)];
-    
-    _actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-    //    [_actionSheet addButtonWithTitle:@"发送短信"];
-    [_actionSheet addButtonWithTitle:@"复制信息"];
-    [_actionSheet addButtonWithTitle:@"取消"];
-    _actionSheet.cancelButtonIndex = [_actionSheet numberOfButtons] - 1;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+        CGFloat contentHeight = [UIScreen mainScreen].bounds.size.height == 568 ? self.view.frame.size.height * 2 : self.view.frame.size.height * 2.4;
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44)];
+        _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, contentHeight);
+        
+        _statisticsView = [[StatisticsView alloc] initWithFrame:CGRectMake(0, 0, 320, contentHeight)];
+        
+        [self.view addSubview:shadowView];
+        [self.view addSubview:_scrollView];
+        [self initSegmentedControlUI];
+        [_scrollView addSubview:_statisticsView];
+        
+        self.sliceColors = @[RGB(246, 155, 0), RGB(129, 195, 29), RGB(62, 173, 219), RGB(232, 89, 70),
+        RGB(148, 141, 139), RGB(229, 66, 115)];
+        
+        _actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+        //    [_actionSheet addButtonWithTitle:@"发送短信"];
+        [_actionSheet addButtonWithTitle:@"复制信息"];
+        [_actionSheet addButtonWithTitle:@"取消"];
+        _actionSheet.cancelButtonIndex = [_actionSheet numberOfButtons] - 1;
+    });
     
 }
 
@@ -107,7 +111,7 @@
 }
 
 - (void)segmentedControlChanged:(UISegmentedControl *)segmentedControl {
-//    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    //    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     
     if (segmentedControl.selectedSegmentIndex == 0) {
         [UIView animateWithDuration:ANIMATION_DURATION * 2 delay:ANIMATION_DURATION * 2 options:UIViewAnimationCurveEaseOut animations:^{
@@ -257,7 +261,6 @@
 #pragma mark - MFMessageComposeViewControllerDelegate
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
-    NSLog(@"%u", result);
     [self dismissModalViewControllerAnimated:YES];
 }
 

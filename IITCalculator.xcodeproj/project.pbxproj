@@ -20,6 +20,8 @@
 		0A8F8DCB16106C68003FC311 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8F8DCA16106C68003FC311 /* AppDelegate.m */; };
 		0A8F8DDE1610881C003FC311 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8F8DDD1610881C003FC311 /* MapKit.framework */; };
 		0A8F8DE016108830003FC311 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8F8DDF16108830003FC311 /* CoreLocation.framework */; };
+		0A9D3094167A19BD0088ED41 /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D3093167A19BD0088ED41 /* UIViewController+KNSemiModal.m */; };
+		0A9D309E167A1CA70088ED41 /* CellSlideShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9D309D167A1CA70088ED41 /* CellSlideShadow@2x.png */; };
 		0AB3869C16108B8A00632E99 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB3869B16108B8A00632E99 /* CoreData.framework */; };
 		0AD36977165D147500CAA12C /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AD36976165D147500CAA12C /* city.plist */; };
 		0AE8B36816731BDF00D7003A /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B35916731BDF00D7003A /* AboutController.m */; };
@@ -91,10 +93,8 @@
 		0AE8B41D16731C1000D7003A /* SearchBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B3BB16731C1000D7003A /* SearchBarBackground@2x.png */; };
 		0AE8B41E16731C1000D7003A /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3BF16731C1000D7003A /* MKMapView+ZoomLevel.m */; };
 		0AE8B41F16731C1000D7003A /* UINavigationBar+shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3C116731C1000D7003A /* UINavigationBar+shadow.m */; };
-		0AE8B42016731C1000D7003A /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3C316731C1000D7003A /* UIViewController+KNSemiModal.m */; };
 		0AE8B42116731C1000D7003A /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B3C516731C1000D7003A /* iRate.bundle */; };
 		0AE8B42216731C1000D7003A /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3C716731C1000D7003A /* iRate.m */; };
-		0AE8B42316731C1000D7003A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3CA16731C1000D7003A /* MBProgressHUD.m */; };
 		0AE8B42416731C1000D7003A /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3CD16731C1000D7003A /* SVModalWebViewController.m */; };
 		0AE8B42516731C1000D7003A /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0AE8B3CE16731C1000D7003A /* SVWebViewController.bundle */; };
 		0AE8B42616731C1000D7003A /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B3D016731C1000D7003A /* SVWebViewController.m */; };
@@ -126,6 +126,9 @@
 		0A8F8DCA16106C68003FC311 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0A8F8DDD1610881C003FC311 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0A8F8DDF16108830003FC311 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0A9D3092167A19BD0088ED41 /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
+		0A9D3093167A19BD0088ED41 /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
+		0A9D309D167A1CA70088ED41 /* CellSlideShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellSlideShadow@2x.png"; sourceTree = "<group>"; };
 		0AB3869B16108B8A00632E99 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0AD36976165D147500CAA12C /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		0AE8B35816731BDF00D7003A /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
@@ -217,13 +220,9 @@
 		0AE8B3BF16731C1000D7003A /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
 		0AE8B3C016731C1000D7003A /* UINavigationBar+shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+shadow.h"; sourceTree = "<group>"; };
 		0AE8B3C116731C1000D7003A /* UINavigationBar+shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+shadow.m"; sourceTree = "<group>"; };
-		0AE8B3C216731C1000D7003A /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
-		0AE8B3C316731C1000D7003A /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
 		0AE8B3C516731C1000D7003A /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
 		0AE8B3C616731C1000D7003A /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
 		0AE8B3C716731C1000D7003A /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
-		0AE8B3C916731C1000D7003A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		0AE8B3CA16731C1000D7003A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		0AE8B3CC16731C1000D7003A /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModalWebViewController.h; sourceTree = "<group>"; };
 		0AE8B3CD16731C1000D7003A /* SVModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVModalWebViewController.m; sourceTree = "<group>"; };
 		0AE8B3CE16731C1000D7003A /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVWebViewController.bundle; sourceTree = "<group>"; };
@@ -328,6 +327,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0A9D3091167A19BD0088ED41 /* KNSemiModal */ = {
+			isa = PBXGroup;
+			children = (
+				0A9D3092167A19BD0088ED41 /* UIViewController+KNSemiModal.h */,
+				0A9D3093167A19BD0088ED41 /* UIViewController+KNSemiModal.m */,
+			);
+			path = KNSemiModal;
+			sourceTree = "<group>";
+		};
 		0AE8B35716731BDF00D7003A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,6 +404,7 @@
 				0AE8B38F16731C1000D7003A /* BarButtonPressed@2x.png */,
 				0AE8B39116731C1000D7003A /* CalcButtonNormal@2x.png */,
 				0AE8B39216731C1000D7003A /* CalcButtonNormalPushed@2x.png */,
+				0A9D309D167A1CA70088ED41 /* CellSlideShadow@2x.png */,
 				0AE8B39316731C1000D7003A /* Chevron@2x.png */,
 				0AE8B39416731C1000D7003A /* ClockIcon@2x.png */,
 				0AE8B39516731C1000D7003A /* Default-568h@2x.png */,
@@ -445,10 +454,10 @@
 			isa = PBXGroup;
 			children = (
 				0AE8B3BD16731C1000D7003A /* Addition */,
+				0A9D3091167A19BD0088ED41 /* KNSemiModal */,
 				0AE8B3C416731C1000D7003A /* iRate */,
 				0A1D6E9216760A60005743D6 /* SDSegmentedControl */,
 				0AE8B3CB16731C1000D7003A /* SVWebViewController */,
-				0AE8B3C816731C1000D7003A /* MBProgressHUD */,
 				0AE8B3D116731C1000D7003A /* XYPieChart */,
 				0AE8B3D416731C1000D7003A /* ZenKeyboard */,
 				0AE8B3D716731C1000D7003A /* ZenListView */,
@@ -464,8 +473,6 @@
 				0AE8B3BF16731C1000D7003A /* MKMapView+ZoomLevel.m */,
 				0AE8B3C016731C1000D7003A /* UINavigationBar+shadow.h */,
 				0AE8B3C116731C1000D7003A /* UINavigationBar+shadow.m */,
-				0AE8B3C216731C1000D7003A /* UIViewController+KNSemiModal.h */,
-				0AE8B3C316731C1000D7003A /* UIViewController+KNSemiModal.m */,
 			);
 			path = Addition;
 			sourceTree = "<group>";
@@ -478,15 +485,6 @@
 				0AE8B3C716731C1000D7003A /* iRate.m */,
 			);
 			path = iRate;
-			sourceTree = "<group>";
-		};
-		0AE8B3C816731C1000D7003A /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				0AE8B3C916731C1000D7003A /* MBProgressHUD.h */,
-				0AE8B3CA16731C1000D7003A /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		0AE8B3CB16731C1000D7003A /* SVWebViewController */ = {
@@ -655,6 +653,7 @@
 				0AE8B42116731C1000D7003A /* iRate.bundle in Resources */,
 				0AE8B42516731C1000D7003A /* SVWebViewController.bundle in Resources */,
 				0AE8B42C16731C1000D7003A /* MainStoryboard.storyboard in Resources */,
+				0A9D309E167A1CA70088ED41 /* CellSlideShadow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,9 +686,7 @@
 				0AE8B3EB16731C1000D7003A /* WebSite.m in Sources */,
 				0AE8B41E16731C1000D7003A /* MKMapView+ZoomLevel.m in Sources */,
 				0AE8B41F16731C1000D7003A /* UINavigationBar+shadow.m in Sources */,
-				0AE8B42016731C1000D7003A /* UIViewController+KNSemiModal.m in Sources */,
 				0AE8B42216731C1000D7003A /* iRate.m in Sources */,
-				0AE8B42316731C1000D7003A /* MBProgressHUD.m in Sources */,
 				0AE8B42416731C1000D7003A /* SVModalWebViewController.m in Sources */,
 				0AE8B42616731C1000D7003A /* SVWebViewController.m in Sources */,
 				0AE8B42816731C1000D7003A /* ZenKeyboard.m in Sources */,
@@ -699,6 +696,7 @@
 				0A1D6E9516760A60005743D6 /* SDSegmentedControl.m in Sources */,
 				0A1D6E9F16761D05005743D6 /* StatisticsView.m in Sources */,
 				0A03C4E81678CF2A00729E09 /* XYPieChart.m in Sources */,
+				0A9D3094167A19BD0088ED41 /* UIViewController+KNSemiModal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
