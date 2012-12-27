@@ -56,7 +56,7 @@
 }
 
 - (void)initPMUUI {
-    _listPMU = [[ZenListView alloc] initWithFrame:CGRectMake(0, _pieChart.frame.origin.y + _pieChart.frame.size.height + 10, 320, 390)];
+    _listPMU = [[ZenListView alloc] initWithFrame:CGRectMake(0, _pieChart.frame.origin.y + _pieChart.frame.size.height + 15, 320, 390)];
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, 280, 20)];
     title.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:20.0f];

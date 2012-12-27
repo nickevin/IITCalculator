@@ -46,8 +46,6 @@
     [[UIBarButtonItem appearance] setBackgroundImage:barHighlightedButton
                                             forState:UIControlStateHighlighted
                                           barMetrics:UIBarMetricsDefault];
-
-    
     
     UIImage *backButton = [[UIImage imageNamed:@"BarBackButtonNormal"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 6)];
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton
@@ -58,6 +56,10 @@
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backHighlightedButton
                                                       forState:UIControlStateHighlighted
                                                     barMetrics:UIBarMetricsDefault];
+    
+    [[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"ToolBarBottom"]
+                            forToolbarPosition:UIToolbarPositionBottom
+                                    barMetrics:UIBarMetricsDefault];
 }
 					
 - (void)applicationWillResignActive:(UIApplication *)application

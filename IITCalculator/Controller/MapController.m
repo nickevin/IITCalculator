@@ -9,8 +9,8 @@
 #import "MapController.h"
 #import "UIViewController+KNSemiModal.h"
 
-#define GEORGIA_TECH_LATITUDE 35.33
-#define GEORGIA_TECH_LONGITUDE 103.23
+#define GEORGIA_TECH_LATITUDE 34.27 // 35.33
+#define GEORGIA_TECH_LONGITUDE 108.95 // 103.23
 
 @interface MapController ()
 
@@ -26,12 +26,11 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self initUI];
-    [self setMapView];
+    [self initValue];
 }
 
 - (void)initUI {
@@ -61,7 +60,7 @@
 
 - (UIButton *)createRefreshButton {
     UIImage *buttonImage = [UIImage imageNamed:@"RefreshIcon"];
-    UIImage *buttonPressedImage = [UIImage imageNamed:@"RefreshIconPushed"];
+    UIImage *buttonPressedImage = [UIImage imageNamed:@"RefreshIconPressed"];
     CGRect frame = CGRectMake(5, (44 - buttonImage.size.height) / 2, buttonImage.size.width, buttonImage.size.height);
     UIButton *button = [UIFactory createButtonWithFrame:frame normalBackground:buttonImage highlightedBackground:buttonPressedImage];
     [button addTarget:self action:@selector(refreshMapView) forControlEvents:UIControlEventTouchUpInside];
@@ -71,7 +70,7 @@
 
 - (UIButton *)createDoneButton {
     UIImage *buttonImage = [UIImage imageNamed:@"DoneIcon"];
-    UIImage *buttonPressedImage = [UIImage imageNamed:@"DoneIconPushed"];
+    UIImage *buttonPressedImage = [UIImage imageNamed:@"DoneIconPressed"];
     CGRect frame = CGRectMake(320 - buttonImage.size.width - 5, (44 - buttonImage.size.height) / 2, buttonImage.size.width, buttonImage.size.height);
     UIButton *button = [UIFactory createButtonWithFrame:frame normalBackground:buttonImage highlightedBackground:buttonPressedImage];
     [button addTarget:self action:@selector(dismissSemiModalView) forControlEvents:UIControlEventTouchUpInside];
@@ -79,15 +78,15 @@
     return button;
 }
 
-- (void)setMapView {
+- (void)initValue {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
         if (_currentCity) {
             City *city = [_config objectForKey:_currentCity];
             CLLocationCoordinate2D centerCoord = {city.coordinate.latitude, city.coordinate.longitude};
-            [_mapView setRegion:MKCoordinateRegionMake(centerCoord, MKCoordinateSpanMake(5, 5)) animated:YES];
+            [_mapView setRegion:MKCoordinateRegionMake(centerCoord, MKCoordinateSpanMake(10, 10)) animated:YES];
         } else {
             CLLocationCoordinate2D centerCoord = {GEORGIA_TECH_LATITUDE, GEORGIA_TECH_LONGITUDE};
-            [_mapView setRegion:MKCoordinateRegionMake(centerCoord, MKCoordinateSpanMake(10, 10)) animated:YES];
+            [_mapView setRegion:MKCoordinateRegionMake(centerCoord, MKCoordinateSpanMake(15, 15)) animated:YES];
         }
         
         for (id key in _config) {
@@ -98,7 +97,7 @@
 }
 
 - (void)refreshMapView {
-    [self setMapView];
+    [self initValue];
 }
 
 - (void)dismissSemiModalView {
@@ -178,16 +177,10 @@
     [self dismissSemiModalView];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidUnload {
-    self.mapView = nil;
     
-    [super viewDidUnload];
+    self.mapView = nil;
 }
 
 @end

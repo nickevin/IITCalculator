@@ -14,19 +14,24 @@
 
 @implementation AboutController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self initUI];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     [self initValue];
 }
 
-- (void)initUI {    
+- (void)initUI {
     self.title = @"关于我们";
 
-    UIImage * backgroundImage = [UIImage imageNamed:@"BackgroundTexture"];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]]];
+    
+    
 }
 
 - (void)initValue {
@@ -38,9 +43,9 @@
     _lbVersion.text = [NSString stringWithFormat:@"版本: V%@(%@)", version, build];
 }
 
-- (void)viewDidUnload {
+- (void)didReceiveMemoryWarning {
     [self setImgIcon:nil];
     [self setLbVersion:nil];
-    [super viewDidUnload];
 }
+
 @end

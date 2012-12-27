@@ -13,13 +13,7 @@
 #import "IITCalculator.h"
 #import "Statistics.h"
 
-@interface StatisticsController : UIViewController <XYPieChartDataSource, XYPieChartDelegate, UIActionSheetDelegate, MFMessageComposeViewControllerDelegate, UISplitViewControllerDelegate>
-
-// outlets
-@property (strong, nonatomic) UISegmentedControl *segmentedControl;
-@property (strong, nonatomic) UIScrollView *scrollView;
-@property (nonatomic, strong) UIActionSheet *actionSheet;
-@property (nonatomic, strong) StatisticsView *statisticsView;
+@interface StatisticsController : ZenPushViewController <XYPieChartDataSource, XYPieChartDelegate, UIActionSheetDelegate, MFMessageComposeViewControllerDelegate>
 
 // model
 @property (nonatomic, strong) IITCalculator *calculator;

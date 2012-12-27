@@ -8,14 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HistoryController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate, NSFetchedResultsControllerDelegate>
+@interface HistoryController : ZenPushViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, NSFetchedResultsControllerDelegate> {
 
-// outlets
-@property (strong, nonatomic) UISearchBar *searchBar;
-@property (strong, nonatomic) UISearchDisplayController *searchController;
+}
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSFetchedResultsController *searchFetchedResultsController;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end

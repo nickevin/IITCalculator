@@ -253,7 +253,7 @@ static const uint kDismissButtonTag = 12;
     id nextResponder = [self nextResponder];
     BOOL isViewController = [nextResponder isKindOfClass:[UIViewController class]];
     BOOL isTabBarController = [nextResponder isKindOfClass:[UITabBarController class]];
-    BOOL isNavigationController = [nextResponder isKindOfClass:[UINavigationController class]];
+    BOOL isNavigationController = [nextResponder isKindOfClass:[UINavigationController class]]; // added by nickevin@gmail.com
     
     if (isNavigationController) {
         UINavigationController *navigationController = nextResponder;

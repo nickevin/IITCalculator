@@ -10,7 +10,16 @@
 #import "TaxSheetController.h"
 #import "AboutController.h"
 
-@interface SettingsController ()
+@interface SettingsController () {
+
+}
+
+// outlets
+@property (nonatomic, strong) SettingsView *settingsView;
+
+
+@property (nonatomic, assign) double pmu;
+@property (nonatomic, assign) double housingFund;
 
 @end
 
@@ -21,23 +30,38 @@
     [super viewDidLoad];
     
     [self initUI];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
     [self initValue];
 }
 
 - (void)initUI {
     self.title = @"设置";
 
-    UIImage * backgroundImage = [UIImage imageNamed:@"BackgroundTexture"];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
-        
-    _tfPMU.delegate = self;
-    _tfHousingFund.delegate = self;
+//    [self.tableView setBackgroundView:nil];
+//    self.tableView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
+
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
+
+    _settingsView = [[SettingsView alloc] initWithFrame:CGRectMake(0, 0, 320, 500)];
+    [self.view addSubview:_settingsView];
     
-    _keyboardView = [[ZenKeyboard alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
-    _keyboardView.textField = _tfPMU;
+    _settingsView.tfPMU.delegate = self;
+    _settingsView.tfHousingFund.delegate = self;
     
-    _keyboardView = [[ZenKeyboard alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
-    _keyboardView.textField = _tfHousingFund;
+    _settingsView.keyboardView = [[ZenKeyboard alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
+    _settingsView.keyboardView.textField = _settingsView.tfPMU;
+    
+    _settingsView.keyboardView = [[ZenKeyboard alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
+    _settingsView.keyboardView.textField = _settingsView.tfHousingFund;
+    
+    [_settingsView.btnTaxSheet addTarget:self action:@selector(presentTaxSheetController:) forControlEvents:UIControlEventTouchUpInside];
+    [_settingsView.btnFeedback addTarget:self action:@selector(sendFeedback:) forControlEvents:UIControlEventTouchUpInside];
+    [_settingsView.btnAbout addTarget:self action:@selector(presentAboutController:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 - (void)initValue {
@@ -46,8 +70,8 @@
     NSString *plistPath = [path stringByAppendingPathComponent:@"user-settings.plist"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
         NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        _tfPMU.text = [FormatUtils formatCurrency:[[map valueForKey:@"pmu"] doubleValue]];
-        _tfHousingFund.text = [FormatUtils formatCurrency:[[map valueForKey:@"housingFund"] doubleValue]];
+        _settingsView.tfPMU.text = [FormatUtils formatCurrency:[[map valueForKey:@"pmu"] doubleValue]];
+        _settingsView.tfHousingFund.text = [FormatUtils formatCurrency:[[map valueForKey:@"housingFund"] doubleValue]];
     }
 }
 
@@ -78,7 +102,7 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)sendFeedback:(id)sender {
+- (void)sendFeedback:(id)sender {
     MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
     
     NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
@@ -96,15 +120,14 @@
     [self presentModalViewController:controller animated:YES];
 }
 
-- (IBAction)presentTaxSheet:(id)sender {
+- (void)presentTaxSheetController:(id)sender {
     TaxSheetController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaxSheetController"];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (IBAction)presentAbout:(id)sender {
+- (void)presentAboutController:(id)sender {
     AboutController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutController"];
     [self.navigationController pushViewController:controller animated:YES];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -116,28 +139,20 @@
 }
 
 - (void)writeToPlist {
-    _pmu = [FormatUtils formatDoubleWithCurrency:_tfPMU.text];
-    _housingFund = [FormatUtils formatDoubleWithCurrency:_tfHousingFund.text];
+    _pmu = [FormatUtils formatDoubleWithCurrency:_settingsView.tfPMU.text];
+    _housingFund = [FormatUtils formatDoubleWithCurrency:_settingsView.tfHousingFund.text];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
     NSString *plistPath = [path stringByAppendingPathComponent:@"user-settings.plist"];
-    NSMutableDictionary *map =[[NSMutableDictionary alloc]init];
+    NSMutableDictionary *map =[[NSMutableDictionary alloc] init];
     [map setValue:[NSNumber numberWithDouble:_pmu] forKey:@"pmu"];
     [map setValue:[NSNumber numberWithDouble:_housingFund] forKey:@"housingFund"];
     [map writeToFile:plistPath atomically:YES];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self.view endEditing:YES];
-}
-
-- (void)viewDidUnload {
-    [self setTfPMU:nil];
-    [self setTfHousingFund:nil];
-    [self setKeyboardView:nil];
-    
-    [super viewDidUnload];
+- (void)didReceiveMemoryWarning {
+    _settingsView = nil;
 }
 
 @end

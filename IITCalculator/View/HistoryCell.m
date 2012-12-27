@@ -19,7 +19,8 @@
         _lbCity.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:30.0f];
         _lbCity.backgroundColor = [UIColor clearColor];
         _lbCity.textColor = RGB(104, 114, 121);
-        
+//        _lbCity.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+
         UILabel *preTaxIncomeTitle = [[UILabel alloc] initWithFrame:CGRectMake(150, 10, 80, 30)];
         preTaxIncomeTitle.font = [UIFont fontWithName:HEITI_SC_LIGHT size:FONT_SIZE_LARGE];
         preTaxIncomeTitle.text = @"税前收入: ";
@@ -59,9 +60,9 @@
         _lbTax.textColor = RGB(104, 114, 121);
         _lbTax.textAlignment = UITextAlignmentRight;
         
-        UIImage *separator = [UIImage imageNamed:@"GenericSeparator"];
-        UIImageView *separatorLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 2)];
-        separatorLine.image = separator;
+//        UIImage *separator = [UIImage imageNamed:@"GenericSeparator"];
+//        UIImageView *separatorView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 2)];
+//        separatorView.image = separator;
 
         [self.contentView addSubview:_lbCity];
         [self.contentView addSubview:preTaxIncomeTitle];
@@ -70,7 +71,7 @@
         [self.contentView addSubview:_lbAfterTaxIncome];
         [self.contentView addSubview:taxTitle];
         [self.contentView addSubview:_lbTax];
-        [self.contentView addSubview:separatorLine];        
+//        [self.contentView addSubview:separatorView];
     }
     
     return self;

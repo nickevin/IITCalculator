@@ -15,15 +15,7 @@
 
 #import "IITCalculator.h"
 
-@interface IITCalculatorController : UIViewController <UITextFieldDelegate, MapControllerDelegate> {
+@interface IITCalculatorController : UIViewController <UITextFieldDelegate, MapControllerDelegate>
 
-}
-
-// outlets
-@property (nonatomic, strong) ZenKeyboard *keyboardView;
-@property (nonatomic, strong) ZenTextField *tfPreTaxIncome;
-@property (nonatomic, strong) UIButton *lbCity;
-
-@property (nonatomic, strong) IITCalculator *calculator;
 
 @end
