@@ -332,7 +332,7 @@
 }
 
 - (void)initInfoUI {
-    _listInfo = [[ZenListView alloc] initWithFrame:CGRectMake(0, _listIncomeTax.frame.origin.y + _listIncomeTax.frame.size.height + 1, 320, 160)];
+    _listInfo = [[ZenListView alloc] initWithFrame:CGRectMake(0, _listIncomeTax.frame.origin.y + _listIncomeTax.frame.size.height + 1, 320, 165)];
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, 280, 20)];
     title.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:20.0f];

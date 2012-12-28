@@ -25,6 +25,7 @@
 		0A8F8DE016108830003FC311 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8F8DDF16108830003FC311 /* CoreLocation.framework */; };
 		0A9D3094167A19BD0088ED41 /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9D3093167A19BD0088ED41 /* UIViewController+KNSemiModal.m */; };
 		0A9D309E167A1CA70088ED41 /* CellSlideShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A9D309D167A1CA70088ED41 /* CellSlideShadow@2x.png */; };
+		0AA8447A168C738700EBAED4 /* ViewCoachMarks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA84479168C738700EBAED4 /* ViewCoachMarks@2x.png */; };
 		0AB3869C16108B8A00632E99 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB3869B16108B8A00632E99 /* CoreData.framework */; };
 		0AD36977165D147500CAA12C /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AD36976165D147500CAA12C /* city.plist */; };
 		0AE8B36816731BDF00D7003A /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE8B35916731BDF00D7003A /* AboutController.m */; };
@@ -140,6 +141,7 @@
 		0A9D3092167A19BD0088ED41 /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
 		0A9D3093167A19BD0088ED41 /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
 		0A9D309D167A1CA70088ED41 /* CellSlideShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CellSlideShadow@2x.png"; sourceTree = "<group>"; };
+		0AA84479168C738700EBAED4 /* ViewCoachMarks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ViewCoachMarks@2x.png"; sourceTree = "<group>"; };
 		0AB3869B16108B8A00632E99 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0AD36976165D147500CAA12C /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
 		0AE8B35816731BDF00D7003A /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 				0AE8B3BB16731C1000D7003A /* SearchBarBackground@2x.png */,
 				0A1A21F3168B34F1003ACCE2 /* TaxSheet@2x.png */,
 				0A0E75B6168B437F00F14951 /* ToolBarBottom@2x.png */,
+				0AA84479168C738700EBAED4 /* ViewCoachMarks@2x.png */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -692,6 +695,7 @@
 				0AE98CC51688750A002F0ADC /* DashedLine@2x.png in Resources */,
 				0A1A21F4168B34F1003ACCE2 /* TaxSheet@2x.png in Resources */,
 				0A0E75B7168B437F00F14951 /* ToolBarBottom@2x.png in Resources */,
+				0AA8447A168C738700EBAED4 /* ViewCoachMarks@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

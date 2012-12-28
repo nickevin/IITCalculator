@@ -90,12 +90,12 @@
                 _hintLabel.frame = CGRectMake((320 + _hintLabel.frame.size.width) - point.x / 2.3, _hintLabel.frame.origin.y, _hintLabel.frame.size.width, _hintLabel.frame.size.height);
                 _arrowView.frame = CGRectMake(_hintLabel.frame.origin.x - 25, _arrowView.frame.origin.y, _arrowView.frame.size.width, _arrowView.frame.size.height);
                                 
-                [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+                [UIView animateWithDuration:0.2 animations:^{
                     _arrowView.transform = CGAffineTransformMakeRotation(M_PI);
                 } completion:nil];
                 
             } else {
-                [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+                [UIView animateWithDuration:0.2 animations:^{
                     _arrowView.transform = CGAffineTransformMakeRotation(0);
                 } completion:nil];
             }
@@ -118,7 +118,7 @@
     //    } completion:^(BOOL finished) {
     //    }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
         [self.navigationController popViewControllerAnimated:YES];
     });
 }

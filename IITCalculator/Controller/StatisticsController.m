@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIActionSheet *actionSheet;
 @property (nonatomic, strong) StatisticsView *statisticsView;
+@property (nonatomic, strong) UIImageView *coachMarksView;
 
 @property (nonatomic, strong) NSMutableArray *slices;
 @property (nonatomic, strong) NSArray *sliceColors;
@@ -46,23 +47,48 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [self initCoachMarks];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, ANIMATION_DURATION * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
         [UIView animateWithDuration:ANIMATION_DURATION animations:^{
             _statisticsView.frame = CGRectMake(0, 0, _statisticsView.frame.size.width, _statisticsView.frame.size.height);
             _segmentedControl.frame = CGRectMake(0, 0, _segmentedControl.frame.size.width, _segmentedControl.frame.size.height);
         } completion:^(BOOL finished) {
-            [self reloadStatistics];
+            [self reloadStatistics];            
         }];
     });
  }
 
+- (void)initCoachMarks {
+    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+    int runCount = [userDefaults boolForKey:@"runCount"];
+    if (runCount == 0) {
+        UIImage *coachMarks = [UIImage imageNamed:@"ViewCoachMarks"];
+        _coachMarksView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, coachMarks.size.width, coachMarks.size.height)];
+        _coachMarksView.image = coachMarks;
+        _coachMarksView.alpha = 0.0;
+
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)];
+        [_coachMarksView setUserInteractionEnabled:YES];
+        [_coachMarksView addGestureRecognizer:tapGesture];
+        
+        [self.view.window addSubview:_coachMarksView];
+        
+        [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationCurveEaseOut animations:^{
+            _coachMarksView.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            [userDefaults setInteger:1 forKey:@"runCount"];
+        }];
+    }
+}
+
 - (void)initUI {    
     self.navigationItem.title = @"统计明细";
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ActionIcon"] style:UIBarButtonItemStyleDone target:self action:@selector(presentActionSheet)];
-    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
-    
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ActionIcon"] style:UIBarButtonItemStyleDone target:self action:@selector(presentActionSheet)];
+        
     UIImage *shadow = [UIImage imageNamed:@"NavigationBarShadow"];
     UIImageView *shadowView = [[UIImageView alloc] initWithFrame:CGRectMake(0, -3, 320, 6)];
     shadowView.image = shadow;
@@ -286,6 +312,14 @@
             [FormatUtils formatCurrency:_statistics.afterTaxIncome],
             [FormatUtils formatCurrency:_statistics.taxableAmount],
             [FormatUtils formatCurrency:_statistics.tax]];
+}
+
+- (void)handleTapGesture {
+    [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationCurveEaseIn animations:^{
+        _coachMarksView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [_coachMarksView removeFromSuperview];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
