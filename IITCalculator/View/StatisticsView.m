@@ -56,9 +56,9 @@
 }
 
 - (void)initPMUUI {
-    _listPMU = [[ZenListView alloc] initWithFrame:CGRectMake(0, _pieChart.frame.origin.y + _pieChart.frame.size.height + 15, 320, 390)];
+    _listPMU = [[ZenListView alloc] initWithFrame:CGRectMake(0, _pieChart.frame.origin.y + _pieChart.frame.size.height + 15, 320, 395)];
     
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, 280, 20)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 18, 280, 20)];
     title.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:20.0f];
     title.text = @"五险一金汇缴明细";
     title.backgroundColor = [UIColor clearColor];
@@ -269,9 +269,9 @@
 }
 
 - (void)initIncomeTaxUI {
-    _listIncomeTax = [[ZenListView alloc] initWithFrame:CGRectMake(0, _listPMU.frame.origin.y + _listPMU.frame.size.height + 1, 320, 210)];
+    _listIncomeTax = [[ZenListView alloc] initWithFrame:CGRectMake(0, _listPMU.frame.origin.y + _listPMU.frame.size.height + 1, 320, 215)];
     
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, 280, 20)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 18, 280, 20)];
     title.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:20.0f];
     title.text = @"个人纳税明细";
     title.backgroundColor = [UIColor clearColor];
@@ -332,9 +332,9 @@
 }
 
 - (void)initInfoUI {
-    _listInfo = [[ZenListView alloc] initWithFrame:CGRectMake(0, _listIncomeTax.frame.origin.y + _listIncomeTax.frame.size.height + 1, 320, 165)];
+    _listInfo = [[ZenListView alloc] initWithFrame:CGRectMake(0, _listIncomeTax.frame.origin.y + _listIncomeTax.frame.size.height + 1, 320, 170)];
     
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, 280, 20)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 18, 280, 20)];
     title.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:20.0f];
     title.text = @"相关政策";
     title.backgroundColor = [UIColor clearColor];

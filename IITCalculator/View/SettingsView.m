@@ -26,9 +26,9 @@
 }
 
 - (void)initCustomizeListUI {
-    _listCustomize = [[ZenListView alloc] initWithFrame:CGRectMake(0, 0, 320, 165)];
+    _listCustomize = [[ZenListView alloc] initWithFrame:CGRectMake(0, 0, 320, 170)];
     
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, 120, 20)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(25, 18, 120, 20)];
     title.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:20.0f];
     title.text = @"自定义";
     title.backgroundColor = [UIColor clearColor];
@@ -76,9 +76,9 @@
 }
 
 - (void)initSectionListUI {
-    _listSection = [[ZenListView alloc] initWithFrame:CGRectMake(0,  _listCustomize.frame.origin.y + _listCustomize.frame.size.height - 30, 320, 210)];
+    _listSection = [[ZenListView alloc] initWithFrame:CGRectMake(0,  _listCustomize.frame.origin.y + _listCustomize.frame.size.height - 30, 320, 215)];
     
-    _btnTaxSheet = [UIFactory createLinkButtonWithFrame:CGRectMake(30, 75, 250, 20)];
+    _btnTaxSheet = [UIFactory createLinkButtonWithFrame:CGRectMake(30, 78, 250, 20)];
     _btnTaxSheet.titleLabel.font = [UIFont fontWithName:HEITI_SC_LIGHT size:FONT_SIZE_LARGE];
     [_btnTaxSheet setTitleColor:RGB(104, 114, 121) forState:UIControlStateNormal];
     _btnTaxSheet.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

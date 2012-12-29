@@ -95,15 +95,15 @@
     [self.view addSubview:shadowView];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
-        CGFloat contentHeight = [UIScreen mainScreen].bounds.size.height == 568 ? self.view.frame.size.height * 2.1 : self.view.frame.size.height * 2.55;
+        CGFloat contentHeight = [UIScreen mainScreen].bounds.size.height == 568 ? self.view.frame.size.height * 2.15: self.view.frame.size.height * 2.6;
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44)];
         _scrollView.contentSize = CGSizeMake(self.view.frame.size.width, contentHeight);
         [self.view addSubview:_scrollView];
-        
-        [self initSegmentedControlUI];
-        
+            
         _statisticsView = [[StatisticsView alloc] initWithFrame:CGRectMake(-320, 0, 320, contentHeight)];
         [_scrollView addSubview:_statisticsView];
+        
+        [self initSegmentedControlUI];
         
         _actionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
         //    [_actionSheet addButtonWithTitle:@"发送短信"];

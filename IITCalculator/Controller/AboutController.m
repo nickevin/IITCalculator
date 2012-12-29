@@ -30,8 +30,6 @@
     self.title = @"关于我们";
 
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]]];
-    
-    
 }
 
 - (void)initValue {
