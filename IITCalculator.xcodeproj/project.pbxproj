@@ -13,6 +13,9 @@
 		0A1A21F4168B34F1003ACCE2 /* TaxSheet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A1A21F3168B34F1003ACCE2 /* TaxSheet@2x.png */; };
 		0A1D6E9516760A60005743D6 /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D6E9416760A60005743D6 /* SDSegmentedControl.m */; };
 		0A1D6E9F16761D05005743D6 /* StatisticsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D6E9E16761D05005743D6 /* StatisticsView.m */; };
+		0A2D636316970B18005CA5AD /* UIThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2D636216970B18005CA5AD /* UIThemeManager.m */; };
+		0A2DC6FF169AFDD400424412 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2DC6FD169AFDD400424412 /* libMobClickLibrary.a */; };
+		0A2DC702169AFE0B00424412 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2DC701169AFE0B00424412 /* libz.dylib */; };
 		0A3616AE16292E5D00E0C6E9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3616AD16292E5D00E0C6E9 /* MessageUI.framework */; };
 		0A5329741615C3C6006E3244 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A5329731615C3C6006E3244 /* QuartzCore.framework */; };
 		0A8F8DBB16106C68003FC311 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8F8DBA16106C68003FC311 /* UIKit.framework */; };
@@ -124,6 +127,11 @@
 		0A1D6E9416760A60005743D6 /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSegmentedControl.m; sourceTree = "<group>"; };
 		0A1D6E9D16761D05005743D6 /* StatisticsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsView.h; sourceTree = "<group>"; };
 		0A1D6E9E16761D05005743D6 /* StatisticsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsView.m; sourceTree = "<group>"; };
+		0A2D636116970B18005CA5AD /* UIThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIThemeManager.h; sourceTree = "<group>"; };
+		0A2D636216970B18005CA5AD /* UIThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIThemeManager.m; sourceTree = "<group>"; };
+		0A2DC6FD169AFDD400424412 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		0A2DC6FE169AFDD400424412 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		0A2DC701169AFE0B00424412 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0A3616AD16292E5D00E0C6E9 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0A5329731615C3C6006E3244 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0A8F8DB616106C68003FC311 /* IITCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IITCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,7 +143,7 @@
 		0A8F8DC616106C68003FC311 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A8F8DC816106C68003FC311 /* IITCalculator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IITCalculator-Prefix.pch"; sourceTree = "<group>"; };
 		0A8F8DC916106C68003FC311 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		0A8F8DCA16106C68003FC311 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0A8F8DCA16106C68003FC311 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		0A8F8DDD1610881C003FC311 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0A8F8DDF16108830003FC311 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0A9D3092167A19BD0088ED41 /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
@@ -158,7 +166,7 @@
 		0AE8B36516731BDF00D7003A /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		0AE8B36616731BDF00D7003A /* TaxSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxSheetController.h; sourceTree = "<group>"; };
 		0AE8B36716731BDF00D7003A /* TaxSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxSheetController.m; sourceTree = "<group>"; };
-		0AE8B37116731C1000D7003A /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		0AE8B37116731C1000D7003A /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Config.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		0AE8B37216731C1000D7003A /* FormatUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormatUtils.h; sourceTree = "<group>"; };
 		0AE8B37316731C1000D7003A /* FormatUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormatUtils.m; sourceTree = "<group>"; };
 		0AE8B37416731C1000D7003A /* UIFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFactory.h; sourceTree = "<group>"; };
@@ -262,6 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2DC702169AFE0B00424412 /* libz.dylib in Frameworks */,
 				0A3616AE16292E5D00E0C6E9 /* MessageUI.framework in Frameworks */,
 				0A5329741615C3C6006E3244 /* QuartzCore.framework in Frameworks */,
 				0AB3869C16108B8A00632E99 /* CoreData.framework in Frameworks */,
@@ -270,6 +279,7 @@
 				0A8F8DBB16106C68003FC311 /* UIKit.framework in Frameworks */,
 				0A8F8DBD16106C68003FC311 /* Foundation.framework in Frameworks */,
 				0A8F8DBF16106C68003FC311 /* CoreGraphics.framework in Frameworks */,
+				0A2DC6FF169AFDD400424412 /* libMobClickLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +293,15 @@
 				0A1D6E9416760A60005743D6 /* SDSegmentedControl.m */,
 			);
 			path = SDSegmentedControl;
+			sourceTree = "<group>";
+		};
+		0A2DC6FC169AFDD400424412 /* UMAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				0A2DC6FD169AFDD400424412 /* libMobClickLibrary.a */,
+				0A2DC6FE169AFDD400424412 /* MobClick.h */,
+			);
+			path = UMAnalytics;
 			sourceTree = "<group>";
 		};
 		0A8F8DAB16106C68003FC311 = {
@@ -305,6 +324,7 @@
 		0A8F8DB916106C68003FC311 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A2DC701169AFE0B00424412 /* libz.dylib */,
 				0A3616AD16292E5D00E0C6E9 /* MessageUI.framework */,
 				0A5329731615C3C6006E3244 /* QuartzCore.framework */,
 				0AB3869B16108B8A00632E99 /* CoreData.framework */,
@@ -383,6 +403,8 @@
 				0AE8B37316731C1000D7003A /* FormatUtils.m */,
 				0AE8B37416731C1000D7003A /* UIFactory.h */,
 				0AE8B37516731C1000D7003A /* UIFactory.m */,
+				0A2D636116970B18005CA5AD /* UIThemeManager.h */,
+				0A2D636216970B18005CA5AD /* UIThemeManager.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -478,15 +500,16 @@
 			isa = PBXGroup;
 			children = (
 				0AE8B3BD16731C1000D7003A /* Addition */,
-				0A9D3091167A19BD0088ED41 /* KNSemiModal */,
 				0AE8B3C416731C1000D7003A /* iRate */,
+				0A9D3091167A19BD0088ED41 /* KNSemiModal */,
 				0A1D6E9216760A60005743D6 /* SDSegmentedControl */,
 				0AE8B3CB16731C1000D7003A /* SVWebViewController */,
+				0A2DC6FC169AFDD400424412 /* UMAnalytics */,
 				0AE8B3D116731C1000D7003A /* XYPieChart */,
 				0AE8B3D416731C1000D7003A /* ZenKeyboard */,
 				0AE8B3D716731C1000D7003A /* ZenListView */,
-				0AE8B3DA16731C1000D7003A /* ZenTextField */,
 				0AE98CBC168873CC002F0ADC /* ZenPushViewController */,
+				0AE8B3DA16731C1000D7003A /* ZenTextField */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -741,6 +764,7 @@
 				0A9D3094167A19BD0088ED41 /* UIViewController+KNSemiModal.m in Sources */,
 				0AE98CBF168873CC002F0ADC /* ZenPushViewController.m in Sources */,
 				0A1A21F2168B23FF003ACCE2 /* SettingsView.m in Sources */,
+				0A2D636316970B18005CA5AD /* UIThemeManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,7 +797,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
@@ -814,10 +838,14 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IITCalculator/IITCalculator-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = "IITCalculator/IITCalculator-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/IITCalculator/Vendor/UMAnalytics\"",
+				);
 				PRODUCT_NAME = IITCalculator;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = NO;
@@ -832,9 +860,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IITCalculator/IITCalculator-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				INFOPLIST_FILE = "IITCalculator/IITCalculator-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/IITCalculator/Vendor/UMAnalytics\"",
+				);
 				PRODUCT_NAME = IITCalculator;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SKIP_INSTALL = NO;

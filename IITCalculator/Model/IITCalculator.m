@@ -47,7 +47,7 @@
     double incomePMU = preTaxIncome;
     double incomeH = preTaxIncome;
     
-    double threshold = kThreshold;
+    double threshold = THRESHOLD;
     
     double pmu = 0.00;
     double housingFund = 0.00;
@@ -103,11 +103,11 @@
     
     // 扣除五险一金
     double amountWithoutIH = preTaxIncome -  incomePMU * (city.iH.pension + city.iH.medicalCare + city.iH.unemployment + city.iH.industrialInjury + city.iH.industrialInjury + city.iH.pregnancy) - incomeH * city.iH.basicHousingFund;
-    SysLog(@"扣除五险一金: %f - %f * (%f + %f + %f + %f + %f) - %f * (%f) = %f", preTaxIncome, incomePMU, city.iH.pension, city.iH.medicalCare, city.iH.unemployment, city.iH.industrialInjury, city.iH.pregnancy, incomeH, ih.basicHousingFund, amountWithoutIH);
+    NSLog(@"扣除五险一金: %f - %f * (%f + %f + %f + %f + %f) - %f * (%f) = %f", preTaxIncome, incomePMU, city.iH.pension, city.iH.medicalCare, city.iH.unemployment, city.iH.industrialInjury, city.iH.pregnancy, incomeH, ih.basicHousingFund, amountWithoutIH);
     
     if (amountWithoutIH < threshold) {
-        SysLog(@"税后收入: %f", amountWithoutIH);
-        SysLog(@"");
+        NSLog(@"税后收入: %f", amountWithoutIH);
+        NSLog(@"");
                 
         Statistics *statistics = [[Statistics alloc]initWithCity:city
                                                           preTaxIncome:preTaxIncome
@@ -127,7 +127,7 @@
     
     // 应税金额: 扣除五险一金 - 起征点
     double taxableAmount = amountWithoutIH - threshold;
-    SysLog(@"计税金额: %f - %f = %f", amountWithoutIH, threshold, taxableAmount);
+    NSLog(@"计税金额: %f - %f = %f", amountWithoutIH, threshold, taxableAmount);
     
     TaxRateSheet *taxRateSheet = [TaxRateSheet initWithTaxableAmount:taxableAmount];
     double taxRate = taxRateSheet.taxRate;
@@ -135,12 +135,12 @@
     
     // 个人所得税
     double tax = taxableAmount * taxRate - deduction;
-    SysLog(@"个人所得税: %f * %f - %f = %f", taxableAmount, taxRate, deduction, tax);
+    NSLog(@"个人所得税: %f * %f - %f = %f", taxableAmount, taxRate, deduction, tax);
     
     // 税后收入
     double afterTaxIncome = amountWithoutIH - tax;
-    SysLog(@"税后收入: %f - %f = %f", amountWithoutIH, tax, afterTaxIncome);
-    SysLog(@"");
+    NSLog(@"税后收入: %f - %f = %f", amountWithoutIH, tax, afterTaxIncome);
+    NSLog(@"");
     
     Statistics *statistics = [[Statistics alloc]initWithCity:city
                                                       preTaxIncome:preTaxIncome

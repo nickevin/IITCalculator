@@ -14,17 +14,18 @@
 #import "FormatUtils.h"
 
 @interface HistoryController () {
-
-    AppDelegate *appDelegate;
-    NSManagedObjectContext *managedObjectContext;
+    
 }
 
 // outlets
-@property (strong, nonatomic) UISearchBar *searchBar;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UISearchBar *searchBar;
 
-@property (strong, nonatomic) UISearchDisplayController *searchController;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSFetchedResultsController *searchFetchedResultsController;
+@property (nonatomic, strong) AppDelegate *appDelegate;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) UISearchDisplayController *searchController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *searchFetchedResultsController;
 
 @end
 
@@ -35,15 +36,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    appDelegate = [[UIApplication sharedApplication] delegate];
-    managedObjectContext = appDelegate.managedObjectContext;
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = self.appDelegate.managedObjectContext;
     
     [self initUI];
 }
 
-- (void)initUI {    
-    self.title = @"历史纪录";
+- (void)viewDidDisappear:(BOOL)animated {
+    // See: http://tinymission.com/post/nsfetchedresultscontroller-and-exc_bad_access
+    self.fetchedResultsController = nil;
+}
 
+- (void)initUI {
+    self.title = @"历史纪录";
+    
     UIImage * backgroundImage = [UIImage imageNamed:@"BackgroundTexture"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:backgroundImage];
     
@@ -68,7 +74,7 @@
 - (void)initSearchBarUI {
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     _searchBar.delegate = self;
-//    _searchBar.text = @"上海";
+    //    _searchBar.text = @"上海";
     _searchBar.backgroundColor = [UIColor clearColor];
     for (UIView *subview in _searchBar.subviews) {
         if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
@@ -89,14 +95,14 @@
     _searchController.searchResultsDataSource = self;
     _searchController.searchResultsDelegate = self;
     //    _searchController.active = YES;
-    [_searchController.searchResultsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];    
+    [_searchController.searchResultsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger count = [[[self fetchedResultsControllerWithTableView:tableView] sections] count];
-     
+    
     return count;
 }
 
@@ -108,7 +114,7 @@
         id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
         numberOfRows = [sectionInfo numberOfObjects];
     }
-        
+    
     return numberOfRows;
 }
 
@@ -133,7 +139,7 @@
     }
     
     [self fetchedResultsController:[self fetchedResultsControllerWithTableView:tableView] configureCell:cell atIndexPath:indexPath];
-
+    
     return cell;
 }
 
@@ -144,7 +150,7 @@
 //
 //- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 //    cell.backgroundColor = (indexPath.row % 2) ? RGB(241, 241, 241) : RGB(247, 247, 247);
-//} 
+//}
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return tableView == self.tableView ? YES : NO;
@@ -154,7 +160,7 @@
     [self.tableView setEditing:YES animated:YES];
 }
 
-- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {    
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView setEditing:NO animated:YES];
 }
 
@@ -188,7 +194,7 @@
            atIndex:(NSUInteger)sectionIndex
      forChangeType:(NSFetchedResultsChangeType)type {
     UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
-        
+    
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
@@ -243,17 +249,17 @@
         }
     }
     
-//    NSLog(@"%@", filterPredicate.debugDescription);
+    //    NSLog(@"%@", filterPredicate.debugDescription);
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setPredicate:filterPredicate];
-    [fetchRequest setEntity:[NSEntityDescription entityForName:kCoreDataEntity_History inManagedObjectContext:managedObjectContext]];
-    [fetchRequest setFetchBatchSize:20];    
+    [fetchRequest setEntity:[NSEntityDescription entityForName:ENTITY_HISTORY inManagedObjectContext:self.managedObjectContext]];
+    [fetchRequest setFetchBatchSize:20];
     [fetchRequest setSortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"createTime" ascending:NO]]];
     
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil /*kCoreDataEntity_History*/];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil /*ENTITY_HISTORY*/];
     aFetchedResultsController.delegate = self;
-        
+    
 	NSError *error = nil;
 	if (![aFetchedResultsController performFetch:&error]) {
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -267,9 +273,9 @@
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-
+    
     _fetchedResultsController = [self fetchedResultsControllerWithSearchString:nil];
-
+    
     return _fetchedResultsController;
 }
 
@@ -285,7 +291,7 @@
 
 #pragma mark - UISearchBarDelegate
 
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {            
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     return YES;
 }
 
@@ -294,6 +300,12 @@
 }
 
 #pragma mark - UISearchDisplayDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [_tableView setEditing:NO animated:YES];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStyleDone target:self action:@selector(editHistory)];
+}
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView {
     if (_searchFetchedResultsController) {
@@ -304,7 +316,7 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
     [self filterContentForSearchText:_searchBar.text scope:_searchBar.selectedScopeButtonIndex];
-        
+    
     return YES;
 }
 
@@ -314,19 +326,19 @@
     return YES;
 }
 
-- (void)filterContentForSearchText:(NSString*)searchText scope:(NSInteger)scope {    
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSInteger)scope {
     self.searchFetchedResultsController.delegate = nil;
     self.searchFetchedResultsController = nil;
 }
 
 - (void)editHistory {
-//    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-//    for (HistoryCell *cell in self.tableView.visibleCells) {
-//        NSIndexPath * indexPath = [(UITableView *)cell.superview indexPathForCell:cell];
-//        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-//    }
-//    
-//    [appDelegate saveContext];
+    //    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    //    for (HistoryCell *cell in self.tableView.visibleCells) {
+    //        NSIndexPath * indexPath = [(UITableView *)cell.superview indexPathForCell:cell];
+    //        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    //    }
+    //
+    //    [appDelegate saveContext];
     
     
     if (_tableView.isEditing) {
@@ -340,14 +352,29 @@
     }
 }
 
+- (void)viewDidUnload {
+    [self _viewDidUnload];
+    
+    [super viewDidUnload];
+}
+
 - (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+    if (self.isViewLoaded && !self.view.window) {
+        [self _viewDidUnload];
+    }
+}
+
+- (void)_viewDidUnload {
+    self.tableView = nil;
     self.searchBar = nil;
     self.searchController = nil;
     
-    appDelegate = nil;
-    managedObjectContext = nil;
+    self.appDelegate = nil;
+    self.managedObjectContext = nil;
     self.fetchedResultsController = nil;
-    self.searchFetchedResultsController = nil;    
+    self.searchFetchedResultsController = nil;
 }
-    
+
 @end

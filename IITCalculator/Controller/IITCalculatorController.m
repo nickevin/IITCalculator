@@ -82,6 +82,7 @@
 }
 
 - (void)initUI {
+    self.title = @"个税计算器";
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
     
     UIImage *shadow = [UIImage imageNamed:@"NavigationBarShadow"];
@@ -202,7 +203,7 @@
 - (void)saveHistory:(Statistics *)statistics {
     History *history = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:managedObjectContext];
     if (history == nil) {
-        SysLog(@"Failed to create the new entity.");
+        NSLog(@"Failed to create the new entity.");
     }
     
     history.preTaxIncome = [NSNumber numberWithDouble:statistics.preTaxIncome];
@@ -240,7 +241,7 @@
 }
 
 - (void)presentSettingsController {
-    SettingsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsController"];
+    SettingsController *controller = [[SettingsController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -272,18 +273,6 @@
     [_lbCity setTitle:city.name forState:UIControlStateNormal];
 }
 
-- (void)didReceiveMemoryWarning {
-    self.mapController = nil;
-    self.calculator = nil;
-    self.keyboardView = nil;
-    self.lbCity = nil;
-    self.tfPreTaxIncome = nil;    
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)writeToPlist {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path = [paths objectAtIndex:0];
@@ -294,5 +283,31 @@
     [map writeToFile:plistPath atomically:YES];
 }
 
+- (void)viewDidUnload {
+    [self _viewDidUnload];
+    
+    [super viewDidUnload];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+    if (self.isViewLoaded && !self.view.window) {
+        [self _viewDidUnload];
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (void)_viewDidUnload {
+    self.mapController = nil;
+    self.calculator = nil;
+    self.keyboardView = nil;
+    self.lbCity = nil;
+    self.tfPreTaxIncome = nil;
+}
 
 @end

@@ -11,7 +11,7 @@
 @interface AboutController : ZenPushViewController
 
 // outlets
-@property (weak, nonatomic) IBOutlet UIImageView *imgIcon;
-@property (weak, nonatomic) IBOutlet UILabel *lbVersion;
+@property (strong, nonatomic) UIImageView *imgIcon;
+@property (strong, nonatomic) UILabel *lbVersion;
 
 @end

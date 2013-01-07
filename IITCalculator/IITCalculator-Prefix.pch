@@ -17,6 +17,7 @@
 #import <MessageUI/MessageUI.h>
 
 #import "AppDelegate.h"
+#import "UIThemeManager.h"
 #import "Config.h"
 #import "FormatUtils.h"
 #import "UIFactory.h"
@@ -24,6 +25,7 @@
 #import "ZenKeyboard.h"
 #import "ZenListView.h"
 #import "ZenTextField.h"
+
 #import "XYPieChart.h"
 #import "UIViewController+KNSemiModal.h"
 #endif

@@ -17,7 +17,6 @@
 // outlets
 @property (nonatomic, strong) SettingsView *settingsView;
 
-
 @property (nonatomic, assign) double pmu;
 @property (nonatomic, assign) double housingFund;
 
@@ -25,26 +24,32 @@
 
 @implementation SettingsController
 
- 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self initUI];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    [self initValue];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *plistPath = [path stringByAppendingPathComponent:@"user-settings.plist"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+        NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        _settingsView.tfPMU.text = [FormatUtils formatCurrency:[[map valueForKey:@"pmu"] doubleValue]];
+        _settingsView.tfHousingFund.text = [FormatUtils formatCurrency:[[map valueForKey:@"housingFund"] doubleValue]];
+    }
 }
 
 - (void)initUI {
     self.title = @"设置";
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
 
 //    [self.tableView setBackgroundView:nil];
 //    self.tableView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
 
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
 
     _settingsView = [[SettingsView alloc] initWithFrame:CGRectMake(0, 0, 320, 500)];
     [self.view addSubview:_settingsView];
@@ -58,21 +63,9 @@
     _settingsView.keyboardView = [[ZenKeyboard alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
     _settingsView.keyboardView.textField = _settingsView.tfHousingFund;
     
-    [_settingsView.btnTaxSheet addTarget:self action:@selector(presentTaxSheetController:) forControlEvents:UIControlEventTouchUpInside];
-    [_settingsView.btnFeedback addTarget:self action:@selector(sendFeedback:) forControlEvents:UIControlEventTouchUpInside];
-    [_settingsView.btnAbout addTarget:self action:@selector(presentAboutController:) forControlEvents:UIControlEventTouchUpInside];
-
-}
-
-- (void)initValue {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths objectAtIndex:0];
-    NSString *plistPath = [path stringByAppendingPathComponent:@"user-settings.plist"];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-        NSDictionary *map = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-        _settingsView.tfPMU.text = [FormatUtils formatCurrency:[[map valueForKey:@"pmu"] doubleValue]];
-        _settingsView.tfHousingFund.text = [FormatUtils formatCurrency:[[map valueForKey:@"housingFund"] doubleValue]];
-    }
+    [_settingsView.btnTaxSheet addTarget:self action:@selector(presentTaxSheetController) forControlEvents:UIControlEventTouchUpInside];
+    [_settingsView.btnFeedback addTarget:self action:@selector(sendFeedback) forControlEvents:UIControlEventTouchUpInside];
+    [_settingsView.btnAbout addTarget:self action:@selector(presentAboutController) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -102,7 +95,7 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)sendFeedback:(id)sender {
+- (void)sendFeedback {
     MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
     
     NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
@@ -120,13 +113,13 @@
     [self presentModalViewController:controller animated:YES];
 }
 
-- (void)presentTaxSheetController:(id)sender {
-    TaxSheetController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"TaxSheetController"];
+- (void)presentTaxSheetController {
+    TaxSheetController *controller = [[TaxSheetController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (void)presentAboutController:(id)sender {
-    AboutController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutController"];
+- (void)presentAboutController {
+    AboutController *controller = [[AboutController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -151,7 +144,21 @@
     [map writeToFile:plistPath atomically:YES];
 }
 
+- (void)viewDidUnload {
+    [self _viewDidUnload];
+    
+    [super viewDidUnload];
+}
+
 - (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+
+    if (self.isViewLoaded && !self.view.window) {
+        [self _viewDidUnload];
+    }
+}
+
+- (void)_viewDidUnload {
     _settingsView = nil;
 }
 

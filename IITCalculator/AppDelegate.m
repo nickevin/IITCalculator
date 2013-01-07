@@ -7,7 +7,11 @@
 //
 
 #import "AppDelegate.h"
+
+#import "IITCalculatorController.h"
+
 #import "iRate.h"
+#import "MobClick.h"
 
 @implementation AppDelegate
 
@@ -15,12 +19,21 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [self customizeiPhoneTheme];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self initRootViewController];
+    [UIThemeManager customizeAppearance];
     [self ratingPrompt];
+//    [self analytics];
     
     return YES;
+}
+
+- (void)initRootViewController {
+    IITCalculatorController *controller = [[IITCalculatorController alloc] init];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self.window makeKeyAndVisible];
 }
 
 - (void)ratingPrompt {
@@ -29,37 +42,8 @@
     [iRate sharedInstance].usesUntilPrompt = 5;
 }
 
-- (void)customizeiPhoneTheme {
-    [self customizeiNavigationBar];
-}
-
-- (void)customizeiNavigationBar {
-    UIImage *navBarBackground = [UIImage imageNamed:@"NavigationBar"];
-    [[UINavigationBar appearance] setBackgroundImage:navBarBackground forBarMetrics:UIBarMetricsDefault];
-    
-    UIImage *barButton = [[UIImage imageNamed:@"BarButtonNormal"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
-    [[UIBarButtonItem appearance] setBackgroundImage:barButton
-                                            forState:UIControlStateNormal
-                                          barMetrics:UIBarMetricsDefault];
-    UIImage *barHighlightedButton = [[UIImage imageNamed:@"BarButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
-
-    [[UIBarButtonItem appearance] setBackgroundImage:barHighlightedButton
-                                            forState:UIControlStateHighlighted
-                                          barMetrics:UIBarMetricsDefault];
-    
-    UIImage *backButton = [[UIImage imageNamed:@"BarBackButtonNormal"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 6)];
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton
-                                                      forState:UIControlStateNormal
-                                                    barMetrics:UIBarMetricsDefault];
-    
-    UIImage *backHighlightedButton = [[UIImage imageNamed:@"BarBackButtonHighlighted"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 12, 0, 6)];
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backHighlightedButton
-                                                      forState:UIControlStateHighlighted
-                                                    barMetrics:UIBarMetricsDefault];
-    
-    [[UIToolbar appearance] setBackgroundImage:[UIImage imageNamed:@"ToolBarBottom"]
-                            forToolbarPosition:UIToolbarPositionBottom
-                                    barMetrics:UIBarMetricsDefault];
+- (void)analytics {
+    [MobClick startWithAppkey:@"50eacb96527015185800007e"];
 }
 					
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -129,7 +113,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:kProductName withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:PRODUCT_NAME withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -142,7 +126,7 @@
         return _persistentStoreCoordinator;
     }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:kCoreDataDBName];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:SQLITE_DB];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

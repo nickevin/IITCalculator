@@ -177,9 +177,21 @@
     [self dismissSemiModalView];
 }
 
+- (void)viewDidUnload {
+    [self _viewDidUnload];
+    
+    [super viewDidUnload];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
+    if (self.isViewLoaded && !self.view.window) {
+        [self _viewDidUnload];
+    }
+}
+
+- (void)_viewDidUnload {
     self.mapView = nil;
 }
 

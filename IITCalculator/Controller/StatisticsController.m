@@ -83,8 +83,7 @@
 }
 
 - (void)initUI {    
-    self.navigationItem.title = @"统计明细";
-    
+    self.title = @"统计明细";
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"ActionIcon"] style:UIBarButtonItemStyleDone target:self action:@selector(presentActionSheet)];
@@ -111,12 +110,12 @@
         [_actionSheet addButtonWithTitle:@"取消"];
         _actionSheet.cancelButtonIndex = [_actionSheet numberOfButtons] - 1;
         
-        self.sliceColors = @[RGB(246, 155, 0),
-                            RGB(129, 195, 29),
-                            RGB(62, 173, 219),
-                            RGB(232, 89, 70),
-                            RGB(148, 141, 139),
-                            RGB(229, 66, 115)];
+        self.sliceColors = @[RGB(240, 40, 50),
+                            RGB(220, 190, 0),
+                            RGB(0, 150, 200),
+                            RGB(210, 100, 5),
+                            RGB(229, 66, 115),
+                            RGB(100, 180, 50)];
     });
 }
 
@@ -131,10 +130,10 @@
 }
 
 - (void)segmentedControlChanged:(UISegmentedControl *)segmentedControl {
-    //    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     
     if (segmentedControl.selectedSegmentIndex == 0) {
-        [UIView animateWithDuration:ANIMATION_DURATION * 2 delay:ANIMATION_DURATION * 2 options:UIViewAnimationCurveEaseOut animations:^{
+        [UIView animateWithDuration:ANIMATION_DURATION * 2 delay:ANIMATION_DURATION * 3 options:UIViewAnimationCurveEaseOut animations:^{
             _statisticsView.frame = CGRectMake(-320, 0, _statisticsView.frame.size.width, _statisticsView.frame.size.height);
             
         } completion:^(BOOL finished) {
@@ -149,7 +148,7 @@
             }];
         }];
     } else {
-        [UIView animateWithDuration:ANIMATION_DURATION * 2 delay:ANIMATION_DURATION * 2 options:UIViewAnimationCurveEaseOut animations:^{
+        [UIView animateWithDuration:ANIMATION_DURATION * 2 delay:ANIMATION_DURATION * 3 options:UIViewAnimationCurveEaseOut animations:^{
             _statisticsView.frame = CGRectMake(320, 0, _statisticsView.frame.size.width, _statisticsView.frame.size.height);
             
         } completion:^(BOOL finished) {
@@ -322,7 +321,21 @@
     }];
 }
 
+- (void)viewDidUnload {
+    [self _viewDidUnload];
+    
+    [super viewDidUnload];
+}
+
 - (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+    if (self.isViewLoaded && !self.view.window) {
+        [self _viewDidUnload];
+    }
+}
+
+- (void)_viewDidUnload {
     self.calculator = nil;
     self.statistics = nil;
     self.segmentedControl = nil;

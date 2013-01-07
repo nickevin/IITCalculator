@@ -20,8 +20,4 @@
 
 @property (nonatomic, weak) id<SettingsControllerDelegate> delegate;
 
-- (IBAction)sendFeedback:(id)sender;
-- (IBAction)presentTaxSheetController:(id)sender;
-- (IBAction)presentAboutController:(id)sender;
-
 @end

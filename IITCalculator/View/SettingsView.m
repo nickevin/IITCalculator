@@ -19,7 +19,6 @@
     return self;
 }
 
-
 - (void)initUI {
     [self initCustomizeListUI];
     [self initSectionListUI];
@@ -36,7 +35,7 @@
     
     UILabel *pmuTitle = [[UILabel alloc] initWithFrame:CGRectMake(35, title.frame.origin.y
                                                                   + 60, 120, 20)];
-    pmuTitle.font = [UIFont fontWithName:HEITI_SC_LIGHT size:FONT_SIZE_LARGE];
+    pmuTitle.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:FONT_SIZE_LARGE];
     pmuTitle.text = @"五险汇缴基数";
     pmuTitle.backgroundColor = [UIColor clearColor];
     pmuTitle.textColor = RGB(104, 114, 121);
@@ -52,7 +51,7 @@
     dividerView.image = divider;
     
     UILabel *housingFundTitle = [[UILabel alloc] initWithFrame:CGRectMake(35, pmuTitle.frame.origin.y + pmuTitle.frame.size.height + 25, 120, 20)];
-    housingFundTitle.font = [UIFont fontWithName:HEITI_SC_LIGHT size:FONT_SIZE_LARGE];
+    housingFundTitle.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:FONT_SIZE_LARGE];
     housingFundTitle.text = @"公积金汇缴基数";
     housingFundTitle.backgroundColor = [UIColor clearColor];
     housingFundTitle.textColor = RGB(104, 114, 121);
@@ -79,7 +78,7 @@
     _listSection = [[ZenListView alloc] initWithFrame:CGRectMake(0,  _listCustomize.frame.origin.y + _listCustomize.frame.size.height - 30, 320, 215)];
     
     _btnTaxSheet = [UIFactory createLinkButtonWithFrame:CGRectMake(30, 78, 250, 20)];
-    _btnTaxSheet.titleLabel.font = [UIFont fontWithName:HEITI_SC_LIGHT size:FONT_SIZE_LARGE];
+    _btnTaxSheet.titleLabel.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:FONT_SIZE_LARGE];
     [_btnTaxSheet setTitleColor:RGB(104, 114, 121) forState:UIControlStateNormal];
     _btnTaxSheet.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [_btnTaxSheet setTitle:@"税率表" forState:UIControlStateNormal];
@@ -91,7 +90,7 @@
     dividerView.image = [UIImage imageNamed:@"GenericSeparator"];
     
     _btnFeedback = [UIFactory createLinkButtonWithFrame:CGRectMake(30, _btnTaxSheet.frame.origin.y + _btnTaxSheet.frame.size.height + 25, 250, 20)];
-    _btnFeedback.titleLabel.font = [UIFont fontWithName:HEITI_SC_LIGHT size:FONT_SIZE_LARGE];
+    _btnFeedback.titleLabel.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:FONT_SIZE_LARGE];
     [_btnFeedback setTitleColor:RGB(104, 114, 121) forState:UIControlStateNormal];
     _btnFeedback.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [_btnFeedback setTitle:@"意见反馈" forState:UIControlStateNormal];
@@ -103,7 +102,7 @@
     dividerView2.image = [UIImage imageNamed:@"GenericSeparator"];
     
     _btnAbout = [UIFactory createLinkButtonWithFrame:CGRectMake(30, _btnFeedback.frame.origin.y + _btnFeedback.frame.size.height + 25, 250, 20)];
-    _btnAbout.titleLabel.font = [UIFont fontWithName:HEITI_SC_LIGHT size:FONT_SIZE_LARGE];
+    _btnAbout.titleLabel.font = [UIFont fontWithName:HEITI_SC_MEDIUM size:FONT_SIZE_LARGE];
     [_btnAbout setTitleColor:RGB(104, 114, 121) forState:UIControlStateNormal];
     _btnAbout.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [_btnAbout setTitle:@"关于我们" forState:UIControlStateNormal];

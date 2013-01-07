@@ -23,22 +23,14 @@
 
 - (void)initUI {
     self.title = @"税率表";
- 
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackgroundTexture"]];
     
     UIImage *img = [UIImage imageNamed:@"TaxSheet"];
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
     imgView.image = img;
-    imgView.center = CGPointMake(self.view.frame.size.width / 2, 200);
+    imgView.center = CGPointMake(self.view.center.x, 200);
     
     [self.view addSubview:imgView];
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end
